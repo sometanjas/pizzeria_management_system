@@ -1,1 +1,1 @@
-# restaurant_management_system
+# pizzeria_management_system
