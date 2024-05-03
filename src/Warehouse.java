@@ -20,5 +20,6 @@ public class Warehouse {
             }
 
         }
+        return true;
     }
 }
