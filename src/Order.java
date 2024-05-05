@@ -9,18 +9,7 @@ public class Order {
         return items;
     }
 
-    public Order(ArrayList<OrderItem> items) {
-        this.items = items;
+    public void addOrderItem(OrderItem item) {
+        this.items.add(item);
     }
-
-//    public ArrayList<Ingredient> getTotalIngredients() {
-//        for (int i = 0; i < this.items.size(); i++) {
-//            int pizzaQty = this.items.get(i).getQuantity();
-//
-//            ArrayList<Ingredient> pizzaIngredients = this.items.get(i).getPizza().getRecipe().getIngredients();
-//            for (int j = 0; j < pizzaIngredients.size(); j++) {
-//
-//            }
-//        }
-//    }
 }

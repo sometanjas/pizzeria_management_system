@@ -1,31 +1,52 @@
 package src;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import src.ingredient.IngredientCheese;
+import src.ingredient.IngredientSchinken;
+import src.ingredient.IngredientTomato;
+import src.pizza.PizzaInterface;
+import src.pizza.PizzaMargaretta;
+import src.pizza.PizzaSchinken;
 
 public class Main {
     public static void main(String[] args) {
-        Recipe margaritaRecipe = new Recipe();
-        margaritaRecipe.withTomatoes(new TomatoIngredient(100));
-        margaritaRecipe.withCheese(new CheeseIngredient(50));
+        // Initialize Objects
+        Warehouse warehouse = new Warehouse();
+        warehouse.setCheese(new IngredientCheese(2000));
+        warehouse.setSchinken(new IngredientSchinken(2000));
+        warehouse.setTomato(new IngredientTomato(2000));
+        // Create order functionality
+        int qty = 1; // from input
+        String pizzaName = "margaretta"; // from input
+        PizzaInterface pizza;
+        switch (pizzaName) {
+            case "margaretta": {
+                pizza = new PizzaMargaretta();
+            }
+            case "schinken": {
+                pizza = new PizzaSchinken();
+            }
+            default: {
+                throw Exception(); // if unrecognised input - return error
+            }
+        }
+        pizza.build(); // initialize the ingredients and price
 
-        Recipe tomatoPizzaRecipe = new Recipe();
-        margaritaRecipe.withTomatoes(new TomatoIngredient(100));
+        OrderItem orderItem = new OrderItem(pizza, qty);
+        Order order = new Order();
+        order.addOrderItem(orderItem);
 
-        Pizza margaritta = new Pizza(margaritaRecipe);
-        Pizza tomatoPizza = new Pizza(tomatoPizzaRecipe);
+        boolean withdrawSuccess = warehouse.withdrawIngredients(order);
+        if (!withdrawSuccess) {
+            // handle insufficient ingredients' capacity in warehouse
+        }
 
-        OrderItem margarittaPosition = new OrderItem(margaritta, 2);
-        OrderItem tomatoPizzaPosition = new OrderItem(margaritta, 1);
+        if (warehouse.isThresholdViolated()) {
+            // alert on the low volume (below threshold) of ingredient in warehouse
+        }
 
-        ArrayList<OrderItem> items = new ArrayList<>();
-        items.add(margarittaPosition);
-        items.add(tomatoPizzaPosition);
-        Order order = new Order(items);
+        // save order to database
+        // ...
+        //
 
-
-
-
-        System.out.println("goodbye world");
     }
 }
