@@ -1,9 +1,6 @@
 package src;
 
-import src.ingredient.Ingredient;
-import src.ingredient.IngredientCheese;
-import src.ingredient.IngredientTomato;
-import src.ingredient.IngredientSchinken;
+import src.ingredient.*;
 import src.pizza.PizzaInterface;
 
 import java.util.ArrayList;
@@ -13,7 +10,11 @@ public class Warehouse {
     private IngredientTomato tomato;
     private IngredientCheese cheese;
     private IngredientSchinken schinken;
-
+    private IngredientDough dough;
+    private IngredientTuna tuna;
+    private IngredientSalmon salmon;
+    private IngredientFruttiDiMare fruttiDiMare;
+    private IngredientOnion onion;
     private int alertThreshold;
 
     public Warehouse() {
@@ -67,6 +68,11 @@ public class Warehouse {
         ingrs.add(this.tomato);
         ingrs.add(this.cheese);
         ingrs.add(this.schinken);
+        ingrs.add(this.tuna);
+        ingrs.add(this.fruttiDiMare);
+        ingrs.add(this.dough);
+        ingrs.add(this.salmon);
+        ingrs.add(this.onion);
         return ingrs;
     }
 
@@ -94,4 +100,43 @@ public class Warehouse {
         this.schinken = schinken;
     }
 
+    public IngredientDough getDough() {
+        return dough;
+    }
+
+    public void setDough(IngredientDough dough) {
+        this.dough = dough;
+    }
+
+    public IngredientTuna getTuna() {
+        return tuna;
+    }
+
+    public void setTuna(IngredientTuna tuna) {
+        this.tuna = tuna;
+    }
+
+    public IngredientSalmon getSalmon() {
+        return salmon;
+    }
+
+    public void setSalmon(IngredientSalmon salmon) {
+        this.salmon = salmon;
+    }
+
+    public IngredientFruttiDiMare getFruttiDiMare() {
+        return fruttiDiMare;
+    }
+
+    public void setFruttiDiMare(IngredientFruttiDiMare fruttiDiMare) {
+        this.fruttiDiMare = fruttiDiMare;
+    }
+
+    public IngredientOnion getOnion() {
+        return onion;
+    }
+
+    public void setOnion(IngredientOnion onion) {
+        this.onion = onion;
+    }
 }
