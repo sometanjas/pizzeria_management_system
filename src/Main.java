@@ -25,6 +25,7 @@ public class Main {
             case "schinken": {
                 pizza = new PizzaSchinken();
             }
+
             default: {
                 throw Exception(); // if unrecognised input - return error
             }

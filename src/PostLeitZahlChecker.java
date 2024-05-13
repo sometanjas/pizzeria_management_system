@@ -10,9 +10,13 @@ public class PostLeitZahlChecker {
 
     private static List<Integer> berlinPLZ = new ArrayList<>();
 
-    static {
+    public PostLeitZahlChecker() {
         // PLZ-Daten aus einer Textdatei laden
-        try (BufferedReader br = new BufferedReader(new FileReader("berlin_plz.txt"))) {
+        loadDataFromFile("berlin_plz.txt");
+    }
+
+    private void loadDataFromFile(String fileName) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
                 berlinPLZ.add(Integer.parseInt(line.trim()));
@@ -28,4 +32,34 @@ public class PostLeitZahlChecker {
 
     //implement User input-method test plz
 
+    /*
+    public boolean testPLZ(String input) {
+
+        try {
+            int plz = Integer.parseInt(input);
+            return istBerlinPLZ(plz);
+        } catch (NumberFormatException e) {
+            // Wenn die Eingabe keine gültige ganze Zahl ist
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        PostLeitZahlChecker plzChecker = new PostLeitZahlChecker();
+
+        // Benutzereingabe abfragen
+        String userInput = JOptionPane.showInputDialog("Bitte geben Sie eine Postleitzahl ein:");
+
+        // Testen, ob die eingegebene Postleitzahl vorhanden ist
+        boolean isBerlinPLZ = plzChecker.testPLZ(userInput);
+
+        // Ergebnis anzeigen
+        if (isBerlinPLZ) {
+            JOptionPane.showMessageDialog(null, "Die eingegebene Postleitzahl ist gültig für Berlin.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Die eingegebene Postleitzahl ist nicht gültig für Berlin.");
+        }
+    }
+
+    */
 }
