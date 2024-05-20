@@ -18,6 +18,14 @@ public class Warehouse {
     private int alertThreshold;
 
     public Warehouse() {
+        this.tomato = new IngredientTomato(1000);
+        this.cheese = new IngredientCheese(1000);
+        this.schinken = new IngredientSchinken(1000);
+        this.dough = new IngredientDough(1000);
+        this.tuna = new IngredientTuna(1000);
+        this.salmon = new IngredientSalmon(1000);
+        this.fruttiDiMare = new IngredientFruttiDiMare(1000);
+        this.onion =  new IngredientOnion(1000);
         this.alertThreshold = 1000;
     }
 

@@ -7,6 +7,8 @@ import src.pizza.PizzaInterface;
 import src.pizza.PizzaMargaretta;
 import src.pizza.PizzaSchinken;
 
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
         // Initialize Objects
@@ -18,18 +20,18 @@ public class Main {
         int qty = 1; // from input
         String pizzaName = "margaretta"; // from input
         PizzaInterface pizza;
-        switch (pizzaName) {
-            case "margaretta": {
-                pizza = new PizzaMargaretta();
-            }
-            case "schinken": {
-                pizza = new PizzaSchinken();
-            }
-
-            default: {
-                throw Exception(); // if unrecognised input - return error
-            }
-        }
+        pizza = new PizzaMargaretta();
+//        switch (pizzaName) {
+//            case "margaretta": {
+//                pizza = new PizzaMargaretta();
+//            }
+//            case "schinken": {
+//                pizza = new PizzaSchinken();
+//            }
+//            default: {
+//                throw new IllegalArgumentException("Unrecognized pizza name: " + pizzaName);// if unrecognised input - return error
+//            }
+//        }
         pizza.build(); // initialize the ingredients and price
 
         OrderItem orderItem = new OrderItem(pizza, qty);
@@ -49,5 +51,33 @@ public class Main {
         // ...
         //
 
+
+        JFrame frame = new JFrame("Pizzeria Management System");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel LoginPanel = new LoginPanel();
+        frame.getContentPane().add(LoginPanel);
+        frame.setSize(800,400);
+        frame.setVisible(false);
+
+        JPanel MainMenuPanel = new MainMenuPanel();
+        frame.getContentPane().add(MainMenuPanel);
+        frame.setSize(800,400);
+        frame.setVisible(false);
+
+        JPanel DeliveryPanel = new QuestionDeliveryPanel();
+        frame.getContentPane().add(DeliveryPanel);
+        frame.setSize(800,400);
+        frame.setVisible(false);
+
+        JPanel PLZPanel = new PLZPanel();
+        frame.getContentPane().add(PLZPanel);
+        frame.setSize(800,400);
+        frame.setVisible(false);
+
+        JPanel DeliveryDataPanel = new DeliveryDataPanel();
+        frame.getContentPane().add(DeliveryDataPanel);
+        frame.setSize(800,400);
+        frame.setVisible(true);
     }
 }
