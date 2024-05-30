@@ -54,30 +54,54 @@ public class Main {
 
         JFrame frame = new JFrame("Pizzeria Management System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+/*
         JPanel LoginPanel = new LoginPanel();
         frame.getContentPane().add(LoginPanel);
         frame.setSize(800,400);
-        frame.setVisible(false);
+        frame.setVisible(true);
+
+        JPanel LoginErrorPanel = new LoginErrorPanel();
+        frame.getContentPane().add(LoginErrorPanel);
+        frame.setSize(800, 400);
+        frame.setVisible(true);
 
         JPanel MainMenuPanel = new MainMenuPanel();
         frame.getContentPane().add(MainMenuPanel);
         frame.setSize(800,400);
-        frame.setVisible(false);
+        frame.setVisible(true);
 
         JPanel DeliveryPanel = new QuestionDeliveryPanel();
         frame.getContentPane().add(DeliveryPanel);
         frame.setSize(800,400);
-        frame.setVisible(false);
+        frame.setVisible(true);
+
 
         JPanel PLZPanel = new PLZPanel();
         frame.getContentPane().add(PLZPanel);
         frame.setSize(800,400);
-        frame.setVisible(false);
+        frame.setVisible(true);
+
+        JPanel PLZErrorPanel = new PLZErrorPanel();
+        frame.getContentPane().add(PLZErrorPanel);
+        frame.setSize(800,400);
+        frame.setVisible(true);
 
         JPanel DeliveryDataPanel = new DeliveryDataPanel();
         frame.getContentPane().add(DeliveryDataPanel);
         frame.setSize(800,400);
         frame.setVisible(true);
+
+
+        JPanel ZutatenCheckerPanel = new ZutatenCheckerPanel();
+        frame.getContentPane().add(ZutatenCheckerPanel);
+        frame.setSize(800, 400);
+        frame.setVisible(true);
+*/
+        JPanel ZutatenWarningPanel = new ZutatenWarningPanel();
+        frame.getContentPane().add(ZutatenWarningPanel);
+        frame.setSize(800, 400);
+        frame.setVisible(true);
+
+
     }
 }
