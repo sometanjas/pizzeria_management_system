@@ -27,7 +27,8 @@ public class PostLeitZahlChecker {
     }
 
     public static boolean istBerlinPLZ(int plz) {
-        return berlinPLZ.contains(plz);
+        return true;
+//        return berlinPLZ.contains(plz);
     }
 
     //implement User input-method test plz

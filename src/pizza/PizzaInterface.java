@@ -9,5 +9,7 @@ public interface PizzaInterface {
 
     int getPrice();
 
+    String getName();
+
     ArrayList<Ingredient> getIngredients();
 }

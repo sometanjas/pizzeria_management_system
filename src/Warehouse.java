@@ -13,7 +13,6 @@ public class Warehouse {
     private IngredientDough dough;
     private IngredientTuna tuna;
     private IngredientSalmon salmon;
-    private IngredientFruttiDiMare fruttiDiMare;
     private IngredientOnion onion;
     private int alertThreshold;
 
@@ -24,7 +23,6 @@ public class Warehouse {
         this.dough = new IngredientDough(1000);
         this.tuna = new IngredientTuna(1000);
         this.salmon = new IngredientSalmon(1000);
-        this.fruttiDiMare = new IngredientFruttiDiMare(1000);
         this.onion =  new IngredientOnion(1000);
         this.alertThreshold = 1000;
     }
@@ -77,7 +75,6 @@ public class Warehouse {
         ingrs.add(this.cheese);
         ingrs.add(this.schinken);
         ingrs.add(this.tuna);
-        ingrs.add(this.fruttiDiMare);
         ingrs.add(this.dough);
         ingrs.add(this.salmon);
         ingrs.add(this.onion);
@@ -130,14 +127,6 @@ public class Warehouse {
 
     public void setSalmon(IngredientSalmon salmon) {
         this.salmon = salmon;
-    }
-
-    public IngredientFruttiDiMare getFruttiDiMare() {
-        return fruttiDiMare;
-    }
-
-    public void setFruttiDiMare(IngredientFruttiDiMare fruttiDiMare) {
-        this.fruttiDiMare = fruttiDiMare;
     }
 
     public IngredientOnion getOnion() {

@@ -1,0 +1,204 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+Order o-- OrderItem
+
+OrderItem o-- PizzaInterface
+
+PizzaSalmone *-- IngredientCheese
+PizzaSalmone *-- IngredientSalmon
+PizzaSalmone *-- IngredientDough
+
+class Order {
+	- ArrayList<OrderItem> items
+	+ Order()
+	+ ArrayList<OrderItem> getItems()
+	+ void addOrderItem(OrderItem item)
+}
+
+abstract class Ingredient {
++ int value;
+	+ String name;
+	+int getValue()
+	+void setValue(int value)
+	+String getName()
+}
+
+interface PizzaInterface {
+	void build()
+	int getPrice()
+	ArrayList<Ingredient> getIngredients()
+}
+
+
+
+class OrderItem {
+ -PizzaInterface pizza;
+	-int quantity;
+	+PizzaInterface getPizza()
+	+int getQuantity()
+	+OrderItem(PizzaInterface pizza, int quantity)
+}
+
+class PizzaSalmone implements PizzaInterface {
+	-IngredientOnion onion;
+	-IngredientCheese cheese;
+	-IngredientSalmon salmon;
+	-IngredientDough dough;
+	-int priceCents;
+	+void build()
+	+int getPrice()
+	+ArrayList<Ingredient> getIngredients()
+}
+
+class IngredientCheese extends Ingredient {
+	+IngredientCheese(int value)
+	}
+
+class IngredientSalmon extends Ingredient {
+	+IngredientSalmon(int value)
+}
+class IngredientDough extends Ingredient {
+	+IngredientDough(int value)
+}
+
+Warehouse *-- Ingredient
+
+class Warehouse {
+-IngredientCheese cheese
+-IngredientSalmon salmon
+-IngredientDough dough
++Warehouse()
++boolean withdrawIngredients(Order order)
++boolean isThresholdViolated()
+-boolean isEnoughCapacityForOrder(Order order)
+-boolean isEnoughIngredients(ArrayList<Ingredient> inputIngrs, int multiplier)
++ArrayList<Ingredient> getIngredients()
+.. Some setter & getter ..
++IngredientSalmon getSalmon()
++void setSalmon(IngredientSalmon salmon)
++IngredientDough getDough()
++void setDough(IngredientDough dough)
++IngredientCheese getCheese()
++void setCheese(IngredientCheese cheese)
+}
+
+LoginController o-- User
+LoginController o-- LoginView
+LoginView o-- LoginController
+
+class User extends Observable {
+-String username
+-String password
++User(String username, String password)
++boolean isValidCredentials(String username, String password)
+}
+
+class LoginView extends JFrame implements Observer {
+-JTextField usernameField
+-JPasswordField passwordField
+-JButton loginButton
+-Label statusLabel
++LoginView()
++void update(Observable o, Object arg)
++void addLoginButtonController(LoginController controller)
++JTextField getUsernameField()
++JPasswordField getPasswordField()
+}
+
+class LoginController implements ActionListener {
+-UserModel model;
+-LoginView loginView;
++LoginController(UserModel model, LoginView view)
++void actionPerformed(ActionEvent e)
+}
+
+FrameManager o-- MainMenuController
+MainMenuPanel *-- MainMenuController
+FrameManager o-- ZutatenBestandController
+ZutatenBestandPanel *-- ZutatenBestandController
+Warehouse o-- ZutatenBestandController
+
+class ZutatenBestandController implements ActionListener
+
+class FrameManager {
+	- JFrame frame;
+	- LoginView loginView;
+	- MainMenuPanel mainMenuPanel;
+	- BestellungsHistoriePanel bestellungsHistoriePanel;
+	- BookkeepingPanel bookkeepingPanel;
+	- BusinessReceiptPanel businessReceiptPanel;
+	- CustomerReceiptPanel customerReceiptPanel;
+	- DeliveryDataPanel deliveryDataPanel;
+	- PLZPanel plzPanel;
+	- QuestionDeliveryPanel questionDeliveryPanel;
+	- SpeisekartePanel speisekartePanel;
+	- ZutatenBestandPanel zutatenBestandPanel;
+	- ZutatenCheckerPanel zutatenCheckerPanel;
+	- ZutatenWarningPanel zutatenWarningPanel;
+	- PickupDataPanel pickupDataPanel;
+
+
++ FrameController()
++ void initialize (All Panels)
+- void setAllInvisible()
++ void showQuestionDelivery()
++ void showBestellungsHistorie()
++ void showBookkeeping()
++ void showWarehouse()
++ void showLogin()
+..some methods..
++ void showMainView()
++ void showPLZ()
++ void showSpeisekarte()
++ void showDeliveryData()
++ void showCustomerReceipt()
++ void showPickup()
+}
+
+
+
+class MainMenuPanel extends JPanel {
+
+	- FrameManager frameManager
+	- MainMenuPanel mainMenuPanel
+	- QuestionDeliveryPanel questionDeliveryPanel
+	- BestellungsHistoriePanel bestellungsHistoriePanel
+	- ZutatenBestandPanel zutatenBestandPanel
+	- BookkeepingPanel bookkeepingPanel
+	- JLabel companyLabel
+	- JButton orderPlacement
+	- JButton orderHistorie
+	- JButton warehouse
+	- JButton bookkeeping
+	- JButton logoutButton
+
+	+ MainMenuPanel(FrameManager frameManager, QuestionDeliveryPanel questionDeliveryPanel, BestellungsHistoriePanel bestellungsHistoriePanel,
+ZutatenBestandPanel zutatenBestandPanel, BookkeepingPanel bookkeepingPanel)
+	}
+
+
+class MainMenuController implements ActionListener {
+
+	+ enum Command
+	- FrameManager frameManager;
+	- Command processedCommand;
+	+ MainMenuController(FrameManager frameManager, Command command)
+	+ void actionPerformed(ActionEvent e)
+}
+
+
+class ZutatenBestandPanel extends JPanel {
+	- FrameManager frameManager;
+	- JLabel companyLabel = new JLabel("Zutaten Bestellen");
+	- JButton backButton = new JButton("Zurueck");
+	+ ZutatenBestandPanel(FrameManager frameManager)
+}
+
+
+
+class main {
+MainMenuPanel mainMenuPanel = new MainMenuPanel(frameManager, questionDeliveryPanel,
+bestellungsHistoriePanel, zutatenBestandPanel, bookkeepingPanel);
+}
+@enduml

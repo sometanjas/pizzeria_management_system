@@ -34,4 +34,9 @@ public class PizzaSalmone implements PizzaInterface {
         ingrs.add(this.dough);
         return ingrs;
     }
+
+    @Override
+    public String getName() {
+        return "Pizza Salmone";
+    }
 }

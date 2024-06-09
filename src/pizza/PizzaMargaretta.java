@@ -27,6 +27,11 @@ public class PizzaMargaretta implements PizzaInterface {
     }
 
     @Override
+    public String getName() {
+        return "Pizza Margaretta";
+    }
+
+    @Override
     public ArrayList<Ingredient> getIngredients() {
         ArrayList<Ingredient> ingrs = new ArrayList<>();
         ingrs.add(this.tomato);

@@ -1,16 +1,76 @@
 package src;
 
+import src.controllers.FrameManager;
+import src.controllers.LoginController;
 import src.ingredient.IngredientCheese;
 import src.ingredient.IngredientSchinken;
 import src.ingredient.IngredientTomato;
-import src.pizza.PizzaInterface;
-import src.pizza.PizzaMargaretta;
-import src.pizza.PizzaSchinken;
+import src.pizza.*;
+import src.views.*;
 
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        // available pizzas
+        ArrayList<PizzaInterface> availablePizzas = new ArrayList<>(Arrays.asList(
+                new PizzaMargaretta(),
+                new PizzaSalmone(),
+                new PizzaSchinken(),
+                new PizzaTonno()
+        ));
+        for (PizzaInterface pi : availablePizzas) {
+            pi.build();
+        }
+        // create a controller containing the main frame
+        FrameManager frameManager = new FrameManager();
+        // Initialize Views
+        BestellungsHistoriePanel bestellungsHistoriePanel = new BestellungsHistoriePanel(frameManager);
+        BookkeepingPanel bookkeepingPanel = new BookkeepingPanel(frameManager);
+        ZutatenBestandPanel zutatenBestandPanel = new ZutatenBestandPanel(frameManager);
+
+        QuestionDeliveryPanel questionDeliveryPanel = new QuestionDeliveryPanel(frameManager);
+        PLZPanel plzPanel = new PLZPanel(frameManager);
+
+
+        BusinessReceiptPanel businessReceiptPanel = new BusinessReceiptPanel();
+        CustomerReceiptPanel customerReceiptPanel = new CustomerReceiptPanel(frameManager);
+        DeliveryDataPanel deliveryDataPanel = new DeliveryDataPanel(frameManager);
+
+        SpeisekartePanel speisekartePanel = new SpeisekartePanel(frameManager, availablePizzas);
+
+        ZutatenCheckerPanel zutatenCheckerPanel = new ZutatenCheckerPanel(frameManager);
+        ZutatenWarningPanel zutatenWarningPanel = new ZutatenWarningPanel(frameManager);
+
+        MainMenuPanel mainMenuPanel = new MainMenuPanel(frameManager, questionDeliveryPanel, bestellungsHistoriePanel, zutatenBestandPanel, bookkeepingPanel);
+
+        PickupDataPanel pickupDataPanel = new PickupDataPanel(frameManager);
+
+        // Login
+        LoginView loginView = new LoginView(frameManager, mainMenuPanel);
+        User myModel = new User("admin", "admin");
+        myModel.addObserver(loginView);
+        LoginController loginController = new LoginController(myModel, loginView);
+        loginView.addLoginButtonController(loginController);
+
+        // initialize controllers
+        frameManager.initialize(loginView,
+                mainMenuPanel,
+                bestellungsHistoriePanel,
+                bookkeepingPanel,
+                businessReceiptPanel,
+                customerReceiptPanel,
+                deliveryDataPanel,
+                plzPanel,
+                questionDeliveryPanel,
+                speisekartePanel,
+                zutatenBestandPanel,
+                zutatenCheckerPanel,
+                zutatenWarningPanel,
+                pickupDataPanel);
+
+
         // Initialize Objects
         Warehouse warehouse = new Warehouse();
         warehouse.setCheese(new IngredientCheese(2000));
@@ -50,58 +110,6 @@ public class Main {
         // save order to database
         // ...
         //
-
-
-        JFrame frame = new JFrame("Pizzeria Management System");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-/*
-        JPanel LoginPanel = new LoginPanel();
-        frame.getContentPane().add(LoginPanel);
-        frame.setSize(800,400);
-        frame.setVisible(true);
-
-        JPanel LoginErrorPanel = new LoginErrorPanel();
-        frame.getContentPane().add(LoginErrorPanel);
-        frame.setSize(800, 400);
-        frame.setVisible(true);
-
-        JPanel MainMenuPanel = new MainMenuPanel();
-        frame.getContentPane().add(MainMenuPanel);
-        frame.setSize(800,400);
-        frame.setVisible(true);
-
-        JPanel DeliveryPanel = new QuestionDeliveryPanel();
-        frame.getContentPane().add(DeliveryPanel);
-        frame.setSize(800,400);
-        frame.setVisible(true);
-
-
-        JPanel PLZPanel = new PLZPanel();
-        frame.getContentPane().add(PLZPanel);
-        frame.setSize(800,400);
-        frame.setVisible(true);
-
-        JPanel PLZErrorPanel = new PLZErrorPanel();
-        frame.getContentPane().add(PLZErrorPanel);
-        frame.setSize(800,400);
-        frame.setVisible(true);
-
-        JPanel DeliveryDataPanel = new DeliveryDataPanel();
-        frame.getContentPane().add(DeliveryDataPanel);
-        frame.setSize(800,400);
-        frame.setVisible(true);
-
-
-        JPanel ZutatenCheckerPanel = new ZutatenCheckerPanel();
-        frame.getContentPane().add(ZutatenCheckerPanel);
-        frame.setSize(800, 400);
-        frame.setVisible(true);
-*/
-        JPanel ZutatenWarningPanel = new ZutatenWarningPanel();
-        frame.getContentPane().add(ZutatenWarningPanel);
-        frame.setSize(800, 400);
-        frame.setVisible(true);
-
 
     }
 }
