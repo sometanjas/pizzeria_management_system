@@ -2,10 +2,15 @@ package src;
 
 import src.controllers.FrameManager;
 import src.controllers.LoginController;
-import src.ingredient.IngredientCheese;
-import src.ingredient.IngredientSchinken;
-import src.ingredient.IngredientTomato;
+import src.ingredient.Ingredient;
+import src.model.Order;
+import src.model.OrderItem;
 import src.pizza.*;
+import src.storage.Migrations;
+import src.storage.order.OrderDao;
+import src.storage.order.OrderDaoDbImpl;
+import src.storage.warehouse.WarehouseDao;
+import src.storage.warehouse.WarehouseDaoDbImpl;
 import src.views.*;
 
 import java.util.ArrayList;
@@ -20,9 +25,14 @@ public class Main {
                 new PizzaSchinken(),
                 new PizzaTonno()
         ));
-        for (PizzaInterface pi : availablePizzas) {
-            pi.build();
+        try {
+            for (PizzaInterface pi : availablePizzas) {
+                pi.build();
+            }
+        } catch (Exception e) {
+            return;
         }
+
         // create a controller containing the main frame
         FrameManager frameManager = new FrameManager();
         // Initialize Views
@@ -71,41 +81,52 @@ public class Main {
                 pickupDataPanel);
 
 
+        // create database schema if not exist - created manually
+//        Migrations.getInstance().createTables();
+
+        // create DAOs
+
         // Initialize Objects
-        Warehouse warehouse = new Warehouse();
-        warehouse.setCheese(new IngredientCheese(2000));
-        warehouse.setSchinken(new IngredientSchinken(2000));
-        warehouse.setTomato(new IngredientTomato(2000));
+        for (String name : Ingredient.getAllowedNames()) {
+            WarehouseDaoDbImpl.getInstance().addIngredient(name, 2000);
+        }
+
+        // create test order
+
+
         // Create order functionality
         int qty = 1; // from input
-        String pizzaName = "margaretta"; // from input
         PizzaInterface pizza;
         pizza = new PizzaMargaretta();
-//        switch (pizzaName) {
-//            case "margaretta": {
-//                pizza = new PizzaMargaretta();
-//            }
-//            case "schinken": {
-//                pizza = new PizzaSchinken();
-//            }
-//            default: {
-//                throw new IllegalArgumentException("Unrecognized pizza name: " + pizzaName);// if unrecognised input - return error
-//            }
-//        }
-        pizza.build(); // initialize the ingredients and price
-
+        try {
+            pizza.build(); // initialize the ingredients and price
+        } catch (Exception e) {
+            return;
+        }
         OrderItem orderItem = new OrderItem(pizza, qty);
-        Order order = new Order();
-        order.addOrderItem(orderItem);
 
-        boolean withdrawSuccess = warehouse.withdrawIngredients(order);
-        if (!withdrawSuccess) {
-            // handle insufficient ingredients' capacity in warehouse
+        Order.getInstance().addOrderItem(orderItem);
+        Order.getInstance().setFirstname("firstnameInput");
+        Order.getInstance().setSecondname("secondnameInput");
+        Order.getInstance().setAddress("addressInput");
+        Order.getInstance().setFloor("1");
+        Order.getInstance().setTelefon("telefonInput");
+        Order.getInstance().setPlz(10313);
+        Order.getInstance().setLieferung(true);
+        try {
+            Order.getInstance().save();
+        } catch (Exception e) {
+            return;
         }
 
-        if (warehouse.isThresholdViolated()) {
-            // alert on the low volume (below threshold) of ingredient in warehouse
-        }
+//        boolean withdrawSuccess = warehouse.withdrawIngredients(order);
+//        if (!withdrawSuccess) {
+//            // handle insufficient ingredients' capacity in warehouse
+//        }
+//
+//        if (warehouse.isThresholdViolated()) {
+//            // alert on the low volume (below threshold) of ingredient in warehouse
+//        }
 
         // save order to database
         // ...

@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class ZutatenBestandPanelController implements ActionListener {
 
-    // TO-DO implement like MainMenuController
+    // TODO implement like MainMenuController
     public ZutatenBestandPanelController() {
 
     }

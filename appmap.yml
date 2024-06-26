@@ -1,0 +1,5 @@
+language: "java"
+name: "pizzeria_management_system"
+appmap_dir: "tmp/appmap"
+packages:
+- path: "src"

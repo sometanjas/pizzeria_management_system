@@ -1,6 +1,8 @@
 package src.views;
 
 import src.controllers.FrameManager;
+import src.model.Order;
+import src.model.OrderItem;
 import src.pizza.*;
 
 import javax.swing.*;
@@ -78,5 +80,9 @@ public class SpeisekartePanel extends JPanel {
                 frameManager.showMainView();
             }
         });
+
+        // TODO: create real order items
+        ArrayList<OrderItem> items = new ArrayList<>();
+        Order.getInstance().setItems(items);
     }
 }

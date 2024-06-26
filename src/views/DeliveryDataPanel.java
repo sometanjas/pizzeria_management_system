@@ -73,6 +73,7 @@ public class DeliveryDataPanel extends JPanel {
 package src.views;
 
 import src.controllers.FrameManager;
+import src.model.Order;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,6 +81,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DeliveryDataPanel extends JPanel {
+
+    private int plz;
     private FrameManager frameManager;
     private JLabel deliveryLabel = new JLabel("Lieferung", SwingConstants.CENTER);
     private JLabel firstnameLabel = new JLabel("Vorname");
@@ -154,6 +157,11 @@ public class DeliveryDataPanel extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Order.getInstance().setFirstname(firstnameInput.getText());
+                Order.getInstance().setSecondname(secondnameInput.getText());
+                Order.getInstance().setAddress(addressInput.getText());
+                Order.getInstance().setFloor(floorInput.getText());
+                Order.getInstance().setTelefon(telefonInput.getText());
                 frameManager.showSpeisekarte();
             }
         });

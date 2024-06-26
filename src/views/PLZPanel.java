@@ -62,6 +62,7 @@ public class PLZPanel extends JPanel {
 package src.views;
 
 import src.controllers.FrameManager;
+import src.model.Order;
 
 import javax.swing.*;
 import java.awt.*;
@@ -130,6 +131,7 @@ public class PLZPanel extends JPanel {
                     convertedTextToInt = Integer.parseInt(text);
                     boolean status = istBerlinPLZ(convertedTextToInt);
                     if (status) {
+                        Order.getInstance().setPlz(convertedTextToInt);
                         frameManager.showDeliveryData();
                     } else {
                         statusLabel.setText("Postleitzahl liegt außerhalb Berlins! Keine Lieferung möglich!");

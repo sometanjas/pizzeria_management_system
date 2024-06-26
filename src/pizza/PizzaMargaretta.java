@@ -1,23 +1,20 @@
 package src.pizza;
 
 import src.ingredient.Ingredient;
-import src.ingredient.IngredientCheese;
-import src.ingredient.IngredientDough;
-import src.ingredient.IngredientTomato;
 
 import java.util.ArrayList;
 
 public class PizzaMargaretta implements PizzaInterface {
-    private IngredientTomato tomato;
-    private IngredientCheese cheese;
-    private IngredientDough dough;
+    private Ingredient tomato;
+    private Ingredient cheese;
+    private Ingredient dough;
     private int priceCents;
 
     @Override
-    public void build() {
-        this.tomato = new IngredientTomato(200);
-        this.cheese = new IngredientCheese(100);
-        this.dough = new IngredientDough(50);
+    public void build() throws Exception {
+        this.tomato = Ingredient.NewTomatoIngredient(200);
+        this.cheese = Ingredient.NewCheeseIngredient(100);
+        this.dough = Ingredient.NewDoughIngredient(50);
         this.priceCents = 890;
     }
 

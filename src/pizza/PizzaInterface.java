@@ -5,7 +5,7 @@ import src.ingredient.Ingredient;
 import java.util.ArrayList;
 
 public interface PizzaInterface {
-    void build();
+    void build() throws Exception;
 
     int getPrice();
 

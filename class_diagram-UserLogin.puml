@@ -1,0 +1,34 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+LoginController o-- User
+LoginController o-- LoginView
+
+class User extends Observable {
+-String username
+-String password
++User(String username, String password)
++boolean isValidCredentials(String username, String password)
+}
+
+class LoginView extends JFrame implements Observer {
+-JTextField usernameField
+-JPasswordField passwordField
+-JButton loginButton
+-Label statusLabel
++LoginView()
++void update(Observable o, Object arg)
++void addLoginButtonController(LoginController controller)
++JTextField getUsernameField()
++JPasswordField getPasswordField()
+}
+
+class LoginController implements ActionListener {
+-UserModel model;
+-LoginView loginView;
++LoginController(UserModel model, LoginView view)
++void actionPerformed(ActionEvent e)
+}
+
+
+@enduml

@@ -1,0 +1,86 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+Warehouse *-- Ingredient
+
+class Warehouse {
+-IngredientCheese cheese
+-IngredientSalmon salmon
+-IngredientDough dough
++Warehouse()
++boolean withdrawIngredients(Order order)
++boolean isThresholdViolated()
+-boolean isEnoughCapacityForOrder(Order order)
+-boolean isEnoughIngredients(ArrayList<Ingredient> inputIngrs, int multiplier)
++ArrayList<Ingredient> getIngredients()
+.. Some setter & getter ..
++IngredientSalmon getSalmon()
++void setSalmon(IngredientSalmon salmon)
++IngredientDough getDough()
++void setDough(IngredientDough dough)
++IngredientCheese getCheese()
++void setCheese(IngredientCheese cheese)
+}
+
+Order o-- OrderItem
+
+OrderItem o-- PizzaInterface
+
+PizzaSalmone *-- IngredientCheese
+PizzaSalmone *-- IngredientSalmon
+PizzaSalmone *-- IngredientDough
+
+class Order {
+	- ArrayList<OrderItem> items
+	+ Order()
+	+ ArrayList<OrderItem> getItems()
+	+ void addOrderItem(OrderItem item)
+}
+
+abstract class Ingredient {
++ int value;
+	+ String name;
+	+int getValue()
+	+void setValue(int value)
+	+String getName()
+}
+
+interface PizzaInterface {
+	void build()
+	int getPrice()
+	ArrayList<Ingredient> getIngredients()
+}
+
+
+
+class OrderItem {
+ -PizzaInterface pizza;
+	-int quantity;
+	+PizzaInterface getPizza()
+	+int getQuantity()
+	+OrderItem(PizzaInterface pizza, int quantity)
+}
+
+class PizzaSalmone implements PizzaInterface {
+	-IngredientOnion onion;
+	-IngredientCheese cheese;
+	-IngredientSalmon salmon;
+	-IngredientDough dough;
+	-int priceCents;
+	+void build()
+	+int getPrice()
+	+ArrayList<Ingredient> getIngredients()
+}
+
+class IngredientCheese extends Ingredient {
+	+IngredientCheese(int value)
+	}
+
+class IngredientSalmon extends Ingredient {
+	+IngredientSalmon(int value)
+}
+class IngredientDough extends Ingredient {
+	+IngredientDough(int value)
+}
+@enduml

@@ -55,6 +55,7 @@ public class QuestionDeliveryPanel extends JPanel {
 package src.views;
 
 import src.controllers.FrameManager;
+import src.model.Order;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,6 +101,7 @@ public class QuestionDeliveryPanel extends JPanel {
         deliveryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Order.getInstance().setLieferung(true);
                 frameManager.showPLZ();
             }
         });
@@ -107,6 +109,7 @@ public class QuestionDeliveryPanel extends JPanel {
         pickupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Order.getInstance().setLieferung(false);
                 frameManager.showPickup();
             }
         });

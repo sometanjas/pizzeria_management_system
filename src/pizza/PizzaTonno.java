@@ -5,18 +5,18 @@ import src.ingredient.*;
 import java.util.ArrayList;
 
 public class PizzaTonno implements PizzaInterface {
-    private IngredientOnion onion;
-    private IngredientCheese cheese;
-    private IngredientTuna tuna;
-    private IngredientDough dough;
+    private Ingredient onion;
+    private Ingredient cheese;
+    private Ingredient tuna;
+    private Ingredient dough;
     private int priceCents;
 
     @Override
-    public void build() {
-        this.onion = new IngredientOnion(200);
-        this.cheese = new IngredientCheese(100);
-        this.tuna = new IngredientTuna(100);
-        this.dough = new IngredientDough(50);
+    public void build() throws Exception {
+        this.onion = Ingredient.NewOnionIngredient(200);
+        this.cheese = Ingredient.NewCheeseIngredient(100);
+        this.tuna = Ingredient.NewTuneIngredient(100);
+        this.dough = Ingredient.NewDoughIngredient(50);
         this.priceCents = 1290;
     }
 

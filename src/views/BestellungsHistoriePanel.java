@@ -28,12 +28,18 @@ public class BestellungsHistoriePanel extends JPanel {
         companyLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
         add(panel);
 
+        // To-Do
+//        CustomerDao customerDao = new CustomerDaoDbImpl();
+//        List<Customer> customerList = customerDao.getAllCustomer();
+//        for (Person p : persons) {
+//            System.out.println("ID: " + p.getId() + ", Name: " + p.getName() + ", Age: " + p.getAge());
+//        }
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameManager.showMainView();
             }
         });
-
     }
 }

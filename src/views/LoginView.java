@@ -158,6 +158,8 @@ public class LoginView extends JPanel implements Observer {
             passwordField.setText("");
             this.frameManager.showMainView();
         } else {
+            usernameField.setText("");
+            passwordField.setText("");
             statusLabel.setText("Username or Password are incorrect!");
         }
     }
