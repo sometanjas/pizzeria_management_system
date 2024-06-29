@@ -61,6 +61,7 @@ public class PickupDataPanel extends JPanel {
 package src.views;
 
 import src.controllers.FrameManager;
+import src.model.Order;
 
 import javax.swing.*;
 import java.awt.*;
@@ -123,6 +124,13 @@ public class PickupDataPanel extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Order.getInstance().setLieferung(false);
+                Order.getInstance().setFirstname(firstnameInput.getText());
+                Order.getInstance().setSecondname(secondnameInput.getText());
+                Order.getInstance().setPlz(0);
+                Order.getInstance().setAddress("");
+                Order.getInstance().setFloor("0");
+                Order.getInstance().setTelefon("");
                 frameManager.showSpeisekarte();
             }
         });

@@ -3,6 +3,8 @@ package src.model;
 import src.ingredient.Ingredient;
 import src.storage.order.OrderDaoDbImpl;
 import src.storage.order.OrderRecord;
+import src.storage.transactions.TransactionRecord;
+import src.storage.transactions.TransactionsDaoDbImpl;
 import src.storage.warehouse.WarehouseDaoDbImpl;
 
 import java.util.ArrayList;
@@ -48,7 +50,10 @@ public class Order {
         }
         // add order record
         OrderRecord or = buildOrderRecord();
-        OrderDaoDbImpl.getInstance().addOrder(or);
+        int orderId = OrderDaoDbImpl.getInstance().addOrder(or);
+
+        TransactionRecord transaction = TransactionRecord.NewOrderTransactionRecord(or.getSum(), orderId);
+        TransactionsDaoDbImpl.getInstance().addTransaction(transaction);
     }
 
     // resulting set will present a flat list of all ingredients that needs to be withdrawn from warehouse
@@ -82,7 +87,16 @@ public class Order {
 
     private OrderRecord buildOrderRecord() {
         int intFloor = Integer.parseInt(this.floor);
-        return new OrderRecord(this.lieferung, this.plz, this.firstname, this.secondname, this.address, intFloor, this.telefon);
+        int sum = buildOrderSum();
+        return new OrderRecord(this.lieferung, this.plz, this.firstname, this.secondname, this.address, intFloor, this.telefon, sum);
+    }
+
+    public int buildOrderSum() {
+        int sum = 0;
+        for (OrderItem item : this.getItems()) {
+            sum += item.getPizza().getPrice() * item.getQuantity();
+        }
+        return sum;
     }
 
     public ArrayList<OrderItem> getItems() {

@@ -10,8 +10,9 @@ public class OrderRecord {
     String telefon;
     int orderID;
 
+    int sum;
 
-    public OrderRecord(boolean lieferungPreference, int plz, String firstname, String secondname, String address, int floor, String telefon) {
+    public OrderRecord(boolean lieferungPreference, int plz, String firstname, String secondname, String address, int floor, String telefon, int sum) {
         this.lieferung = lieferungPreference;
         this.plz = plz;
         this.firstname = firstname;
@@ -19,6 +20,7 @@ public class OrderRecord {
         this.address = address;
         this.floor = floor;
         this.telefon = telefon;
+        this.sum = sum;
     }
 
     public int getOrderID() {
@@ -83,5 +85,13 @@ public class OrderRecord {
 
     public void setTelefon(String telefon) {
         this.telefon = telefon;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
     }
 }

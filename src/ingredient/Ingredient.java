@@ -1,26 +1,26 @@
 package src.ingredient;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Ingredient {
 
-    public static List<String> getAllowedNames() {
-        return new ArrayList<>(Arrays.asList(
-                "cheese",
-                "dough",
-                "onion",
-                "salmon",
-                "schinken",
-                "tomato",
-                "tune"));
+    public static Map<String, Integer> getAvailableValues() {
+        return new HashMap<>() {{
+            put("cheese", 500);
+            put("dough", 300);
+            put("onion", 300);
+            put("salmon", 1500);
+            put("schinken", 1000);
+            put("tomato", 500);
+            put("tune", 800);
+        }};
     }
 
-    public int value;
+    private int value;
 
-    public String name;
+    private String name;
+
+    private int price;
 
     public int getValue() {
         return value;
@@ -34,11 +34,17 @@ public class Ingredient {
         return name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public Ingredient(String name, int value) throws Exception {
-        if (!Ingredient.getAllowedNames().contains(name)) {
+        Map<String, Integer> availableValues = Ingredient.getAvailableValues();
+        if (!availableValues.containsKey(name)) {
             throw new Exception("Unsupported ingredient: " + name);
         }
         this.name = name;
+        this.price = availableValues.get(name);
         this.value = value;
     }
 
@@ -67,6 +73,7 @@ public class Ingredient {
     }
 
     public static Ingredient NewTuneIngredient(int value) throws Exception {
+        Map<String, Integer> availableValues = Ingredient.getAvailableValues();
         return new Ingredient("tune", value);
     }
 }

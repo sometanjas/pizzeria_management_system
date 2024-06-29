@@ -1,11 +1,17 @@
 package src.views;
 
 import src.controllers.FrameManager;
+import src.storage.order.OrderDaoDbImpl;
+import src.storage.order.OrderRecord;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class BestellungsHistoriePanel extends JPanel {
     private FrameManager frameManager;
@@ -27,6 +33,22 @@ public class BestellungsHistoriePanel extends JPanel {
         panel.setVisible(true);
         companyLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
         add(panel);
+
+
+        String[] header = new String[]{
+                "Order ID", "Sum", "Lieferung", "Address", "Floor", "PLZ", "Telefon", "First Name", "Second Name"
+        };
+        List<OrderRecord> allOrders = OrderDaoDbImpl.getInstance().getAllOrders();
+        DefaultTableModel model = new DefaultTableModel(header, allOrders.size());
+        for (OrderRecord o : allOrders) {
+            Object[] rowData = {o.getOrderID(), o.getSum(), o.isLieferung(), o.getAddress(), o.getFloor(), o.getPlz(), o.getTelefon(), o.getFirstname(), o.getSecondname()};
+            model.addRow(rowData);
+        }
+
+        JTable table = new JTable(model);
+        JScrollPane scrollPan = new JScrollPane(table);
+        add(scrollPan);
+
 
         // To-Do
 //        CustomerDao customerDao = new CustomerDaoDbImpl();

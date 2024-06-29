@@ -4,6 +4,8 @@ import src.controllers.FrameManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ZutatenCheckerPanel extends JPanel {
 
@@ -13,20 +15,33 @@ public class ZutatenCheckerPanel extends JPanel {
     private JLabel infoLabel = new JLabel ("Zutaten für Pizza " + "XY" + " nicht vorhanden!");
     private JLabel alternateOrderLabel = new JLabel("Alternative Bestellung?");
     private JButton yesButton = new JButton("Ja");
-    private JButton noButton = new JButton("Nein");
+    private JButton killswitchButton = new JButton("Nein");
 
     public ZutatenCheckerPanel(FrameManager frameManager) {
-
         super();
         this.frameManager = frameManager;
         setBackground(Color.WHITE);
         add(zutatenCheckerLabel);
         add(errorLabel);
         add(infoLabel);
-        add(alternateOrderLabel);
         add(yesButton);
-        add(noButton);
-        zutatenCheckerLabel.setFont(new Font("SansSerif", Font.ITALIC, 28));
+        add(alternateOrderLabel);
+        alternateOrderLabel.setFont(new Font("SansSerif", Font.ITALIC, 28));
+        add(killswitchButton);
+
+        yesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameManager.showSpeisekarte();
+            }
+        });
+
+        killswitchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameManager.showMainView();
+            }
+        });
     }
 }
 

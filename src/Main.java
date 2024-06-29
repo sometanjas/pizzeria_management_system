@@ -7,31 +7,11 @@ import src.model.Order;
 import src.model.OrderItem;
 import src.pizza.*;
 import src.storage.Migrations;
-import src.storage.order.OrderDao;
-import src.storage.order.OrderDaoDbImpl;
-import src.storage.warehouse.WarehouseDao;
 import src.storage.warehouse.WarehouseDaoDbImpl;
 import src.views.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
-        // available pizzas
-        ArrayList<PizzaInterface> availablePizzas = new ArrayList<>(Arrays.asList(
-                new PizzaMargaretta(),
-                new PizzaSalmone(),
-                new PizzaSchinken(),
-                new PizzaTonno()
-        ));
-        try {
-            for (PizzaInterface pi : availablePizzas) {
-                pi.build();
-            }
-        } catch (Exception e) {
-            return;
-        }
 
         // create a controller containing the main frame
         FrameManager frameManager = new FrameManager();
@@ -48,7 +28,8 @@ public class Main {
         CustomerReceiptPanel customerReceiptPanel = new CustomerReceiptPanel(frameManager);
         DeliveryDataPanel deliveryDataPanel = new DeliveryDataPanel(frameManager);
 
-        SpeisekartePanel speisekartePanel = new SpeisekartePanel(frameManager, availablePizzas);
+        SpeisekartePanel speisekartePanel = new SpeisekartePanel(frameManager);
+        //SpeisekartePanel speisekartePanel = new SpeisekartePanel(frameManager, availablePizzas);
 
         ZutatenCheckerPanel zutatenCheckerPanel = new ZutatenCheckerPanel(frameManager);
         ZutatenWarningPanel zutatenWarningPanel = new ZutatenWarningPanel(frameManager);
@@ -82,13 +63,17 @@ public class Main {
 
 
         // create database schema if not exist - created manually
-//        Migrations.getInstance().createTables();
+        Migrations.getInstance().createTables();
 
         // create DAOs
 
         // Initialize Objects
-        for (String name : Ingredient.getAllowedNames()) {
-            WarehouseDaoDbImpl.getInstance().addIngredient(name, 2000);
+        // entrySet():
+        // The entrySet() method returns a set of map entries, where each entry is an instance of Map.Entry<K, V>.
+        // Here, K is the type of keys and V is the type of values in the map.
+        // Using entrySet(), you can iterate over the map and access both keys and values directly.
+        for (var entry : Ingredient.getAvailableValues().entrySet()) {
+            WarehouseDaoDbImpl.getInstance().addIngredient(entry.getKey(), 2000);
         }
 
         // create test order

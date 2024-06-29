@@ -56,28 +56,34 @@ public class OrderDaoDbImpl implements OrderDao {
 
     private OrderRecord extractOrder(ResultSet resultSet) throws SQLException {
         boolean lieferung = resultSet.getBoolean("lieferung");
-        int lpz = resultSet.getInt("lpz");
+        int lpz = resultSet.getInt("plz");
         String firstname = resultSet.getString("firstname");
         String secondname = resultSet.getString("secondname");
         String address = resultSet.getString("address");
         int floor = resultSet.getInt("floor");
         String telefon = resultSet.getString("telefon");
+        int sum = resultSet.getInt("sum");
         int orderid = resultSet.getInt("orderid");
-        OrderRecord or = new OrderRecord(lieferung, lpz, firstname, secondname, address, floor, telefon);
+        OrderRecord or = new OrderRecord(lieferung, lpz, firstname, secondname, address, floor, telefon, sum);
         or.setOrderID(orderid);
         return or;
     }
 
     @Override
-    public void addOrder(OrderRecord orderRecord) {
-        String sql = "INSERT INTO orders (lieferung, plz, firstname, secondname, address, floor, telefon, orderid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public int addOrder(OrderRecord orderRecord) {
+        String sql = "INSERT INTO orders (lieferung, plz, firstname, secondname, address, floor, telefon, sum) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//        String sql = "INSERT INTO orders (lieferung, plz, firstname, secondname, address, floor, telefon, sum, orderid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//        if (orderRecord.getOrderID() != 0) {
+//        }
 
         Connection connection = null;
         PreparedStatement statement = null;
+        int result = -1;
 
         try {
+
             connection = OracleDsSingleton.getInstance().getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql, new String[]{"ORDERID"});
             statement.setBoolean(1, orderRecord.isLieferung());
             statement.setInt(2, orderRecord.getPlz());
             statement.setString(3, orderRecord.getFirstname());
@@ -85,9 +91,13 @@ public class OrderDaoDbImpl implements OrderDao {
             statement.setString(5, orderRecord.getAddress());
             statement.setInt(6, orderRecord.getFloor());
             statement.setString(7, orderRecord.getTelefon());
-            statement.setInt(8, orderRecord.getOrderID());
+            statement.setInt(8, orderRecord.getSum());
 
             statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            rs.next();
+            result = rs.getInt(1);
+            return result;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -98,5 +108,6 @@ public class OrderDaoDbImpl implements OrderDao {
                 e.printStackTrace();
             }
         }
+        return result;
     }
 }

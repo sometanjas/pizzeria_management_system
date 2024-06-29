@@ -162,6 +162,11 @@ public class DeliveryDataPanel extends JPanel {
                 Order.getInstance().setAddress(addressInput.getText());
                 Order.getInstance().setFloor(floorInput.getText());
                 Order.getInstance().setTelefon(telefonInput.getText());
+                firstnameInput.setText("");
+                secondnameInput.setText("");
+                addressInput.setText("");
+                floorInput.setText("");
+                telefonInput.setText("");
                 frameManager.showSpeisekarte();
             }
         });

@@ -5,5 +5,5 @@ import java.util.List;
 public interface OrderDao {
     List<OrderRecord> getAllOrders();
 
-    void addOrder(OrderRecord orderRecord);
+    int addOrder(OrderRecord orderRecord);
 }

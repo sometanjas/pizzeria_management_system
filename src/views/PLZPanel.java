@@ -132,6 +132,7 @@ public class PLZPanel extends JPanel {
                     boolean status = istBerlinPLZ(convertedTextToInt);
                     if (status) {
                         Order.getInstance().setPlz(convertedTextToInt);
+                        plzInput.setText("");
                         frameManager.showDeliveryData();
                     } else {
                         statusLabel.setText("Postleitzahl liegt außerhalb Berlins! Keine Lieferung möglich!");

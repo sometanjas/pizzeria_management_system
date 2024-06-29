@@ -138,6 +138,31 @@ public class FrameManager {
         this.frame.repaint();
     }
 
+    public void showZutatenWarningPanel() {
+        this.setAllInvisible();
+        this.zutatenWarningPanel.setVisible(true);
+        this.frame.getContentPane().add(this.zutatenWarningPanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+
+    public void showZutatenCheckerPanel() {
+        this.setAllInvisible();
+        this.zutatenCheckerPanel.setVisible(true);
+        this.frame.getContentPane().add(this.zutatenCheckerPanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+
+
+    public void showBusinessReceiptPanel() {
+        this.setAllInvisible();
+        this.businessReceiptPanel.setVisible(true);
+        this.frame.getContentPane().add(this.businessReceiptPanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+
     public void showLogin() {
         this.setAllInvisible();
         this.loginView.setVisible(true);
