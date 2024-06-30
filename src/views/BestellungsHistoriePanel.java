@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ public class BestellungsHistoriePanel extends JPanel {
     private JLabel companyLabel = new JLabel("Bestellungshistorie");
 
     private JButton backButton = new JButton("Zurueck");
+    private DefaultTableModel tableModel = new DefaultTableModel();
 
     public BestellungsHistoriePanel(FrameManager frameManager) {
 
@@ -35,19 +37,26 @@ public class BestellungsHistoriePanel extends JPanel {
         add(panel);
 
 
-        String[] header = new String[]{
-                "Order ID", "Sum", "Lieferung", "Address", "Floor", "PLZ", "Telefon", "First Name", "Second Name"
-        };
-        List<OrderRecord> allOrders = OrderDaoDbImpl.getInstance().getAllOrders();
-        DefaultTableModel model = new DefaultTableModel(header, allOrders.size());
-        for (OrderRecord o : allOrders) {
-            Object[] rowData = {o.getOrderID(), o.getSum(), o.isLieferung(), o.getAddress(), o.getFloor(), o.getPlz(), o.getTelefon(), o.getFirstname(), o.getSecondname()};
-            model.addRow(rowData);
-        }
+//        String[] header = new String[]{
+//                "Order ID", "Sum", "Lieferung", "Address", "Floor", "PLZ", "Telefon", "First Name", "Second Name"
+//        };
+//        List<OrderRecord> allOrders = OrderDaoDbImpl.getInstance().getAllOrders();
+//        DefaultTableModel model = new DefaultTableModel(header, allOrders.size());
+//        for (OrderRecord o : allOrders) {
+//            Object[] rowData = {o.getOrderID(), o.getSum(), o.isLieferung(), o.getAddress(), o.getFloor(), o.getPlz(), o.getTelefon(), o.getFirstname(), o.getSecondname()};
+//            model.addRow(rowData);
+//        }
+//
+//        JTable table = new JTable(model);
+//        JScrollPane scrollPane = new JScrollPane(table);
+//        add(scrollPane);
 
-        JTable table = new JTable(model);
-        JScrollPane scrollPan = new JScrollPane(table);
-        add(scrollPan);
+
+        this.refreshData();
+
+        JTable table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane);
 
 
         // To-Do
@@ -63,5 +72,17 @@ public class BestellungsHistoriePanel extends JPanel {
                 frameManager.showMainView();
             }
         });
+    }
+
+    public void refreshData() {
+        String[] header = new String[]{
+                "Order ID", "Sum", "Lieferung", "Address", "Floor", "PLZ", "Telefon", "First Name", "Second Name"
+        };
+        this.tableModel.setDataVector(new Object[][]{}, header);
+        List<OrderRecord> allOrders = OrderDaoDbImpl.getInstance().getAllOrders();
+        for (OrderRecord o : allOrders) {
+            Object[] rowData = {o.getOrderID(), o.getSum(), o.isLieferung(), o.getAddress(), o.getFloor(), o.getPlz(), o.getTelefon(), o.getFirstname(), o.getSecondname()};
+            tableModel.addRow(rowData);
+        }
     }
 }

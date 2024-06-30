@@ -1,8 +1,10 @@
 package src.controllers;
 
+import src.ingredient.IngredientOrderItem;
 import src.views.*;
 
 import javax.swing.*;
+import java.util.List;
 
 public class FrameManager {
     private JFrame frame;
@@ -84,6 +86,7 @@ public class FrameManager {
 
     public void showBestellungsHistorie() {
         this.setAllInvisible();
+        this.bestellungsHistoriePanel.refreshData();
         this.bestellungsHistoriePanel.setVisible(true);
         this.frame.getContentPane().add(this.bestellungsHistoriePanel);
         this.frame.revalidate();
@@ -132,6 +135,7 @@ public class FrameManager {
 
     public void showCustomerReceipt() {
         this.setAllInvisible();
+        this.customerReceiptPanel.refreshData();
         this.customerReceiptPanel.setVisible(true);
         this.frame.getContentPane().add(this.customerReceiptPanel);
         this.frame.revalidate();
@@ -155,8 +159,9 @@ public class FrameManager {
     }
 
 
-    public void showBusinessReceiptPanel() {
+    public void showBusinessReceiptPanel(List<IngredientOrderItem> items) {
         this.setAllInvisible();
+        this.businessReceiptPanel.refreshData(items);
         this.businessReceiptPanel.setVisible(true);
         this.frame.getContentPane().add(this.businessReceiptPanel);
         this.frame.revalidate();

@@ -3,8 +3,11 @@ package src.views;
 import src.controllers.FrameManager;
 import src.model.Order;
 import src.model.OrderItem;
+import src.storage.order.OrderDaoDbImpl;
+import src.storage.order.OrderRecord;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,23 +15,9 @@ import java.awt.event.ActionListener;
 public class CustomerReceiptPanel extends JPanel {
     private FrameManager frameManager;
     private JLabel companyLabel = new JLabel("CustomerReceipt");
-
-    private JLabel pizzaLabel = new JLabel("Pizza:");
-    private JLabel preisLabel = new JLabel("Preis:");
-    private JLabel anzahlLabel = new JLabel("Anzahl:");
-
-    private JLabel margaretta = new JLabel("Margaretta");
-    private JLabel salmone = new JLabel("Salmone");
-    private JLabel schinken = new JLabel("Schinken");
-    private JLabel tonno = new JLabel("Tonno");
-
-    private JLabel margarettaPreis = new JLabel("10 Euro");
-    private JLabel salmonePreis = new JLabel("15 Euro");
-    private JLabel schinkenPreis = new JLabel("12 Euro");
-    private JLabel tonnoPreis = new JLabel("12 Euro");
-
-
     private JButton backButton = new JButton("Zurueck zum Hauptmenu");
+
+    private DefaultTableModel tableModel = new DefaultTableModel();
 
     public CustomerReceiptPanel(FrameManager frameManager) {
 
@@ -45,14 +34,11 @@ public class CustomerReceiptPanel extends JPanel {
         companyLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
         add(panel);
 
-//        for (OrderItem item : Order.getInstance().getItems()) {
-//            String name = item.getPizza().getName();
-//            int anzahl = item.getQuantity();
-//            JLabel nameLabel = new JLabel(" " + name);
-//            JLabel anzahlLabel = new JLabel(" " + anzahl);
-//            add(nameLabel);
-//            add(anzahlLabel);
-//        }
+        this.refreshData();
+
+        JTable table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane);
 
 
         backButton.addActionListener(new ActionListener() {
@@ -62,6 +48,28 @@ public class CustomerReceiptPanel extends JPanel {
             }
         });
 
+    }
+
+    public void refreshData() {
+        String[] header = new String[]{
+                "Name", "Quantity", "Price"
+        };
+        this.tableModel.setDataVector(new Object[][]{}, header);
+
+        int totalPrice = 0;
+        int totalQty = 0;
+        for (OrderItem item : Order.getInstance().getItems()) {
+            String name = item.getPizza().getName();
+            int price = item.getPizza().getPrice();
+            int qty = item.getQuantity();
+
+            Object[] rowData = {name, qty, price};
+            tableModel.addRow(rowData);
+            totalPrice += price;
+            totalQty += qty;
+        }
+        Object[] rowData = {"Total", totalQty, totalPrice};
+        tableModel.addRow(rowData);
     }
 }
 

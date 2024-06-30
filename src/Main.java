@@ -24,7 +24,7 @@ public class Main {
         PLZPanel plzPanel = new PLZPanel(frameManager);
 
 
-        BusinessReceiptPanel businessReceiptPanel = new BusinessReceiptPanel();
+        BusinessReceiptPanel businessReceiptPanel = new BusinessReceiptPanel(frameManager);
         CustomerReceiptPanel customerReceiptPanel = new CustomerReceiptPanel(frameManager);
         DeliveryDataPanel deliveryDataPanel = new DeliveryDataPanel(frameManager);
 
