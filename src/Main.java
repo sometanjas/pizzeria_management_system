@@ -32,7 +32,6 @@ public class Main {
         //SpeisekartePanel speisekartePanel = new SpeisekartePanel(frameManager, availablePizzas);
 
         ZutatenCheckerPanel zutatenCheckerPanel = new ZutatenCheckerPanel(frameManager);
-        ZutatenWarningPanel zutatenWarningPanel = new ZutatenWarningPanel(frameManager);
 
         MainMenuPanel mainMenuPanel = new MainMenuPanel(frameManager, questionDeliveryPanel, bestellungsHistoriePanel, zutatenBestandPanel, bookkeepingPanel);
 
@@ -58,7 +57,6 @@ public class Main {
                 speisekartePanel,
                 zutatenBestandPanel,
                 zutatenCheckerPanel,
-                zutatenWarningPanel,
                 pickupDataPanel);
 
 

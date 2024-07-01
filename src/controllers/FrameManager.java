@@ -20,7 +20,6 @@ public class FrameManager {
     private SpeisekartePanel speisekartePanel;
     private ZutatenBestandPanel zutatenBestandPanel;
     private ZutatenCheckerPanel zutatenCheckerPanel;
-    private ZutatenWarningPanel zutatenWarningPanel;
     private PickupDataPanel pickupDataPanel;
 
 
@@ -40,7 +39,6 @@ public class FrameManager {
                            SpeisekartePanel speisekartePanel,
                            ZutatenBestandPanel zutatenBestandPanel,
                            ZutatenCheckerPanel zutatenCheckerPanel,
-                           ZutatenWarningPanel zutatenWarningPanel,
                            PickupDataPanel pickupDataPanel) {
         this.loginView = loginView;
         this.mainMenuPanel = mainMenuPanel;
@@ -54,7 +52,6 @@ public class FrameManager {
         this.speisekartePanel = speisekartePanel;
         this.zutatenBestandPanel = zutatenBestandPanel;
         this.zutatenCheckerPanel = zutatenCheckerPanel;
-        this.zutatenWarningPanel = zutatenWarningPanel;
         this.pickupDataPanel = pickupDataPanel;
 
         this.frame.setSize(1500, 500);
@@ -142,14 +139,6 @@ public class FrameManager {
         this.frame.repaint();
     }
 
-    public void showZutatenWarningPanel() {
-        this.setAllInvisible();
-        this.zutatenWarningPanel.setVisible(true);
-        this.frame.getContentPane().add(this.zutatenWarningPanel);
-        this.frame.revalidate();
-        this.frame.repaint();
-    }
-
     public void showZutatenCheckerPanel() {
         this.setAllInvisible();
         this.zutatenCheckerPanel.setVisible(true);
@@ -199,7 +188,6 @@ public class FrameManager {
         this.speisekartePanel.setVisible(false);
         this.zutatenBestandPanel.setVisible(false);
         this.zutatenCheckerPanel.setVisible(false);
-        this.zutatenWarningPanel.setVisible(false);
         this.pickupDataPanel.setVisible(false);
     }
 }
