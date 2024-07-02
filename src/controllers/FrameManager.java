@@ -16,6 +16,7 @@ public class FrameManager {
     private CustomerReceiptPanel customerReceiptPanel;
     private DeliveryDataPanel deliveryDataPanel;
     private PLZPanel plzPanel;
+    private PLZErrorPanel plzErrorPanel;
     private QuestionDeliveryPanel questionDeliveryPanel;
     private SpeisekartePanel speisekartePanel;
     private ZutatenBestandPanel zutatenBestandPanel;
@@ -34,7 +35,7 @@ public class FrameManager {
                            BusinessReceiptPanel businessReceiptPanel,
                            CustomerReceiptPanel customerReceiptPanel,
                            DeliveryDataPanel deliveryDataPanel,
-                           PLZPanel plzPanel,
+                           PLZPanel plzPanel, PLZErrorPanel plzErrorPanel,
                            QuestionDeliveryPanel questionDeliveryPanel,
                            SpeisekartePanel speisekartePanel,
                            ZutatenBestandPanel zutatenBestandPanel,
@@ -48,6 +49,7 @@ public class FrameManager {
         this.customerReceiptPanel = customerReceiptPanel;
         this.deliveryDataPanel = deliveryDataPanel;
         this.plzPanel = plzPanel;
+        this.plzErrorPanel = plzErrorPanel;
         this.questionDeliveryPanel = questionDeliveryPanel;
         this.speisekartePanel = speisekartePanel;
         this.zutatenBestandPanel = zutatenBestandPanel;
@@ -110,6 +112,14 @@ public class FrameManager {
         this.setAllInvisible();
         this.plzPanel.setVisible(true);
         this.frame.getContentPane().add(this.plzPanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+
+    public void showPLZError() {
+        this.setAllInvisible();
+        this.plzErrorPanel.setVisible(true);
+        this.frame.getContentPane().add(this.plzErrorPanel);
         this.frame.revalidate();
         this.frame.repaint();
     }

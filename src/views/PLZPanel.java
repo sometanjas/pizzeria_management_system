@@ -59,9 +59,11 @@ public class PLZPanel extends JPanel {
     }
 }
 */
+// PLZPanel.java
 package src.views;
 
 import src.controllers.FrameManager;
+import src.PostLeitZahlChecker;
 import src.model.Order;
 
 import javax.swing.*;
@@ -69,12 +71,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static src.PostLeitZahlChecker.istBerlinPLZ;
-
 public class PLZPanel extends JPanel {
 
     private Integer convertedTextToInt = 0;
-
     private FrameManager frameManager;
     private JLabel deliveryLabel = new JLabel("Lieferung", SwingConstants.CENTER);
     private JLabel plzLabel = new JLabel("Geben Sie die PLZ ein", SwingConstants.CENTER);
@@ -83,9 +82,12 @@ public class PLZPanel extends JPanel {
     private JButton backButton = new JButton("Zurueck");
     private JLabel statusLabel = new JLabel("", SwingConstants.CENTER);
 
+    private PostLeitZahlChecker plzChecker;
+
     public PLZPanel(FrameManager frameManager) {
         super(new BorderLayout());
         this.frameManager = frameManager;
+        this.plzChecker = new PostLeitZahlChecker();
         setBackground(Color.WHITE);
 
         // Setup delivery label
@@ -127,18 +129,13 @@ public class PLZPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String text = plzInput.getText();
-                try {
-                    convertedTextToInt = Integer.parseInt(text);
-                    boolean status = istBerlinPLZ(convertedTextToInt);
-                    if (status) {
-                        Order.getInstance().setPlz(convertedTextToInt);
-                        plzInput.setText("");
-                        frameManager.showDeliveryData();
-                    } else {
-                        statusLabel.setText("Postleitzahl liegt außerhalb Berlins! Keine Lieferung möglich!");
-                    }
-                } catch (NumberFormatException ex) {
-                    statusLabel.setText("Ungültige Postleitzahl!");
+                boolean status = plzChecker.testPLZ(text);
+                if (status) {
+                    Order.getInstance().setPlz(Integer.parseInt(text));
+                    plzInput.setText("");
+                    frameManager.showDeliveryData();
+                } else {
+                    frameManager.showPLZError();
                 }
             }
         });
@@ -151,5 +148,3 @@ public class PLZPanel extends JPanel {
         });
     }
 }
-
-

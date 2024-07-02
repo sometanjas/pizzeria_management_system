@@ -22,6 +22,7 @@ public class Main {
 
         QuestionDeliveryPanel questionDeliveryPanel = new QuestionDeliveryPanel(frameManager);
         PLZPanel plzPanel = new PLZPanel(frameManager);
+        PLZErrorPanel plzErrorPanel = new PLZErrorPanel(frameManager);
 
 
         BusinessReceiptPanel businessReceiptPanel = new BusinessReceiptPanel(frameManager);
@@ -53,6 +54,7 @@ public class Main {
                 customerReceiptPanel,
                 deliveryDataPanel,
                 plzPanel,
+                plzErrorPanel,
                 questionDeliveryPanel,
                 speisekartePanel,
                 zutatenBestandPanel,

@@ -1,5 +1,7 @@
 package src.views;
 
+import src.controllers.FrameManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public class PLZErrorPanel extends JPanel {
     private JLabel errorLabel = new JLabel ("Postleitzahl liegt außerhalb Berlins! Keine Lieferung möglich!");
     private JButton backToOrderMenuButton = new JButton("Zurück zur Bestellaufnahme");
 
-    public PLZErrorPanel() {
+    public PLZErrorPanel(FrameManager frameManager) {
 
         super();
         setBackground(Color.WHITE);

@@ -27,15 +27,10 @@ public class PostLeitZahlChecker {
     }
 
     public static boolean istBerlinPLZ(int plz) {
-        return true;
-//        return berlinPLZ.contains(plz);
+        return berlinPLZ.contains(plz);
     }
 
-    //implement User input-method test plz
-
-    /*
     public boolean testPLZ(String input) {
-
         try {
             int plz = Integer.parseInt(input);
             return istBerlinPLZ(plz);
@@ -44,23 +39,4 @@ public class PostLeitZahlChecker {
             return false;
         }
     }
-
-    public static void main(String[] args) {
-        PostLeitZahlChecker plzChecker = new PostLeitZahlChecker();
-
-        // Benutzereingabe abfragen
-        String userInput = JOptionPane.showInputDialog("Bitte geben Sie eine Postleitzahl ein:");
-
-        // Testen, ob die eingegebene Postleitzahl vorhanden ist
-        boolean isBerlinPLZ = plzChecker.testPLZ(userInput);
-
-        // Ergebnis anzeigen
-        if (isBerlinPLZ) {
-            JOptionPane.showMessageDialog(null, "Die eingegebene Postleitzahl ist gültig für Berlin.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Die eingegebene Postleitzahl ist nicht gültig für Berlin.");
-        }
-    }
-
-    */
 }
