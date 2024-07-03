@@ -31,32 +31,48 @@ public class PostLeitZahlChecker {
     }
     */
 
-    public static ArrayList<String> xxx() throws IOException {
+//    public static ArrayList<String> xxx() throws IOException {
+//        Scanner s = new Scanner(new File("berlin_plz.txt"));
+//        //ArrayList<String> list = new ArrayList<>();
+//        while (s.hasNext()){
+//            berlinPLZ.add(s.next());
+//        }
+//        s.close();
+//        return berlinPLZ;
+//    }
+//
+//    public static boolean istBerlinPLZ(String input) throws IOException {
+//            try{ PostLeitZahlChecker.xxx();}
+//            catch(IOException e) {
+//            e.printStackTrace();
+//        }
+//        return berlinPLZ.contains(input);
+//    }
+//
+//    public boolean testPLZ(String input) throws IOException{
+//        try {
+//            //int plz = Integer.parseInt(input);
+//            //return istBerlinPLZ(plz);
+//            return istBerlinPLZ(input);
+//        } catch (NumberFormatException e) {
+//            // Wenn die Eingabe keine gültige ganze Zahl ist
+//            return false;
+//        }
+//    }
+
+    public static boolean istBerlin(String input) throws IOException {
         Scanner s = new Scanner(new File("berlin_plz.txt"));
-        //ArrayList<String> list = new ArrayList<>();
         while (s.hasNext()){
             berlinPLZ.add(s.next());
         }
         s.close();
-        return berlinPLZ;
+        for (String element : berlinPLZ){
+            if (element.contains(input)){
+                return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean istBerlinPLZ(String input) throws IOException {
-            try{ PostLeitZahlChecker.xxx();}
-            catch(IOException e) {
-            e.printStackTrace();
-        }
-        return berlinPLZ.contains(input);
-    }
 
-    public boolean testPLZ(String input) throws IOException{
-        try {
-            //int plz = Integer.parseInt(input);
-            //return istBerlinPLZ(plz);
-            return istBerlinPLZ(input);
-        } catch (NumberFormatException e) {
-            // Wenn die Eingabe keine gültige ganze Zahl ist
-            return false;
-        }
-    }
 }

@@ -131,7 +131,8 @@ public class PLZPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String text = plzInput.getText();
                 try {
-                    boolean status = plzChecker.testPLZ(text);
+//                    boolean status = plzChecker.testPLZ(text);
+                    boolean status = PostLeitZahlChecker.istBerlin(text);
                     if (status) {
                         Order.getInstance().setPlz(Integer.parseInt(text));
                         plzInput.setText("");
