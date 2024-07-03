@@ -1,20 +1,24 @@
 package src;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class PostLeitZahlChecker {
 
-    private static List<Integer> berlinPLZ = new ArrayList<>();
+    public static ArrayList<String> berlinPLZ = new ArrayList<>();
 
+    /*
     public PostLeitZahlChecker() {
         // PLZ-Daten aus einer Textdatei laden
         loadDataFromFile("berlin_plz.txt");
     }
-
+*/
+    /*
     private void loadDataFromFile(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -25,15 +29,31 @@ public class PostLeitZahlChecker {
             e.printStackTrace();
         }
     }
+    */
 
-    public static boolean istBerlinPLZ(int plz) {
-        return berlinPLZ.contains(plz);
+    public static ArrayList<String> xxx() throws IOException {
+        Scanner s = new Scanner(new File("berlin_plz.txt"));
+        //ArrayList<String> list = new ArrayList<>();
+        while (s.hasNext()){
+            berlinPLZ.add(s.next());
+        }
+        s.close();
+        return berlinPLZ;
     }
 
-    public boolean testPLZ(String input) {
+    public static boolean istBerlinPLZ(String input) throws IOException {
+            try{ PostLeitZahlChecker.xxx();}
+            catch(IOException e) {
+            e.printStackTrace();
+        }
+        return berlinPLZ.contains(input);
+    }
+
+    public boolean testPLZ(String input) throws IOException{
         try {
-            int plz = Integer.parseInt(input);
-            return istBerlinPLZ(plz);
+            //int plz = Integer.parseInt(input);
+            //return istBerlinPLZ(plz);
+            return istBerlinPLZ(input);
         } catch (NumberFormatException e) {
             // Wenn die Eingabe keine gültige ganze Zahl ist
             return false;

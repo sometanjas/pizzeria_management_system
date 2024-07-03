@@ -70,6 +70,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class PLZPanel extends JPanel {
 
@@ -129,13 +130,18 @@ public class PLZPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String text = plzInput.getText();
-                boolean status = plzChecker.testPLZ(text);
-                if (status) {
-                    Order.getInstance().setPlz(Integer.parseInt(text));
-                    plzInput.setText("");
-                    frameManager.showDeliveryData();
-                } else {
-                    frameManager.showPLZError();
+                try {
+                    boolean status = plzChecker.testPLZ(text);
+                    if (status) {
+                        Order.getInstance().setPlz(Integer.parseInt(text));
+                        plzInput.setText("");
+                        frameManager.showDeliveryData();
+                    } else {
+                        frameManager.showPLZError();
+                    }
+                }
+                catch(IOException f) {
+                    f.printStackTrace();
                 }
             }
         });
