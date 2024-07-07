@@ -25,6 +25,8 @@ public class BookkeepingPanel extends JPanel {
 
     private JButton backButton = new JButton("Zurück");
 
+    private JLabel wrongInput = new JLabel("");
+
     public BookkeepingPanel(FrameManager frameManager) {
 
         super();
@@ -36,6 +38,7 @@ public class BookkeepingPanel extends JPanel {
         panel.add(einzahlung);
         panel.add(moneyInput);
         panel.add(depositMoneyButton);
+        panel.add(wrongInput);
         panel.add(backButton);
         // Layout setup
         this.refreshData();
@@ -66,6 +69,10 @@ public class BookkeepingPanel extends JPanel {
         }
         moneyInput.setText("");
         bottomline.setText(String.format("Geld auf dem Pizzeria-Konto: %d", currentBalance));
+    }
+
+    public JLabel getWrongInput() {
+        return wrongInput;
     }
 
     public JTextField getMoneyInput() {
