@@ -56,16 +56,16 @@ public class SpeisekartePanel extends JPanel {
 
         panel.add(margaretta);
         panel.add(margarettaAnzahl);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(salmone);
         panel.add(salmoneAnzahl);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(schinken);
         panel.add(schinkenAnzahl);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(tonno);
         panel.add(tonnoAnzahl);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(weiterButton);
         panel.add(wrongInput);
 
