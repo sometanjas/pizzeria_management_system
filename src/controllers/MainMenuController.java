@@ -1,9 +1,5 @@
 package src.controllers;
 
-import src.User;
-import src.views.LoginView;
-import src.views.MainMenuPanel;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

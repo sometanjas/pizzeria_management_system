@@ -3,9 +3,6 @@ package src.views;
 import src.controllers.FrameManager;
 import src.model.Order;
 import src.model.OrderItem;
-import src.storage.order.OrderDaoDbImpl;
-import src.storage.order.OrderRecord;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

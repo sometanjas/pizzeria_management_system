@@ -5,14 +5,12 @@ import src.model.NotEnoughIngrsException;
 import src.model.Order;
 import src.model.OrderItem;
 import src.pizza.*;
-import src.pizza.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SpeisekartePanel extends JPanel {
 
