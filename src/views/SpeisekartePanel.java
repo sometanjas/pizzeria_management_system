@@ -17,63 +17,65 @@ public class SpeisekartePanel extends JPanel {
 
     private FrameManager frameManager;
     private JLabel speiseKarteLabel = new JLabel("Speisekarte");
-    private JLabel pizzaLabel = new JLabel("Pizza:");
-    private JLabel preisLabel = new JLabel("Preis:");
-    private JLabel anzahlLabel = new JLabel("Anzahl:");
 
-    private JLabel margaretta = new JLabel("Margaretta");
-    private JLabel salmone = new JLabel("Salmone");
-    private JLabel schinken = new JLabel("Schinken");
-    private JLabel tonno = new JLabel("Tonno");
-
-    private JLabel margarettaPreis = new JLabel("10 Euro");
-    private JLabel salmonePreis = new JLabel("15 Euro");
-    private JLabel schinkenPreis = new JLabel("12 Euro");
-    private JLabel tonnoPreis = new JLabel("12 Euro");
+    private JLabel margaretta = new JLabel("Margaretta: 8,90 Euro");
+    private JLabel salmone = new JLabel("Salmone: 15,90 Euro");
+    private JLabel schinken = new JLabel("Schinken: 9,00 Euro");
+    private JLabel tonno = new JLabel("Tonno: 12,90 Euro");
 
     private JTextField margarettaAnzahl = new JTextField(20);
     private JTextField salmoneAnzahl = new JTextField(20);
     private JTextField schinkenAnzahl = new JTextField(20);
     private JTextField tonnoAnzahl = new JTextField(20);
-    private ArrayList<PizzaInterface> availablePizzas;
-
 
     private JButton weiterButton = new JButton("Weiter");
     private JButton killswitchButton = new JButton("Abbruch");
 
-    //public SpeisekartePanel(FrameManager frameManager, ArrayList<PizzaInterface> availablePizzas) {
     public SpeisekartePanel(FrameManager frameManager) {
-        super();
+        super(new BorderLayout());
         this.frameManager = frameManager;
-        //this.availablePizzas = availablePizzas;
         setBackground(Color.WHITE);
 
-        add(speiseKarteLabel);
-        add(pizzaLabel);
-        add(preisLabel);
-        add(anzahlLabel);
+        speiseKarteLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createEmptyBorder(50, 600, 50, 600));
+        setBackground(Color.WHITE);
+
+        margaretta.setAlignmentX(Component.CENTER_ALIGNMENT);
+        margarettaAnzahl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        salmone.setAlignmentX(Component.CENTER_ALIGNMENT);
+        salmoneAnzahl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        schinken.setAlignmentX(Component.CENTER_ALIGNMENT);
+        schinkenAnzahl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tonno.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tonnoAnzahl.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panel.add(margaretta);
+        panel.add(margarettaAnzahl);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(salmone);
+        panel.add(salmoneAnzahl);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(schinken);
+        panel.add(schinkenAnzahl);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(tonno);
+        panel.add(tonnoAnzahl);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(weiterButton);
+
+        // Panel for kill switch button
+        JPanel killSwitchPanel = new JPanel(new BorderLayout());
+        killSwitchPanel.setBackground(Color.WHITE);
+        killSwitchPanel.add(killswitchButton, BorderLayout.WEST);
+
+        add(speiseKarteLabel, BorderLayout.NORTH);
+        add(panel, BorderLayout.CENTER);
+        add(killSwitchPanel, BorderLayout.SOUTH);
 
 
-        add(margaretta);
-        add(margarettaPreis);
-        add(margarettaAnzahl);
-        add(salmone);
-        add(salmonePreis);
-        add(salmoneAnzahl);
-        add(schinken);
-        add(schinkenPreis);
-        add(schinkenAnzahl);
-        add(tonno);
-        add(tonnoPreis);
-        add(tonnoAnzahl);
-
-
-        speiseKarteLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
-        pizzaLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
-        preisLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
-        anzahlLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
-
-        add(weiterButton);
         weiterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,9 +122,6 @@ public class SpeisekartePanel extends JPanel {
                 frameManager.showCustomerReceipt();
             }
         });
-
-
-        add(killswitchButton);
 
         killswitchButton.addActionListener(new ActionListener() {
             @Override

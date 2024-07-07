@@ -12,9 +12,9 @@ public class PickupDataPanel extends JPanel {
     private FrameManager frameManager;
     private JLabel deliveryLabel = new JLabel("Selbstabholung", SwingConstants.CENTER);
     private JLabel firstnameLabel = new JLabel("Vorname", SwingConstants.CENTER);
-    private JTextField firstnameInput = new JTextField(20);
+    private JTextField firstnameInput = new JTextField(15);
     private JLabel secondnameLabel = new JLabel("Nachname", SwingConstants.CENTER);
-    private JTextField secondnameInput = new JTextField(20);
+    private JTextField secondnameInput = new JTextField(15);
     private JButton nextButton = new JButton("Weiter");
     private JButton killSwitchButton = new JButton("Abbruch");
 
@@ -30,7 +30,7 @@ public class PickupDataPanel extends JPanel {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
         inputPanel.setBackground(Color.WHITE);
-        inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 600, 200, 600));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // Center-align the labels, input, and button
         firstnameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -55,9 +55,14 @@ public class PickupDataPanel extends JPanel {
         backPanel.setBackground(Color.WHITE);
         backPanel.add(killSwitchButton, BorderLayout.WEST);
 
+        // Center the form panel within the main panel
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setBackground(Color.WHITE);
+        centerPanel.add(inputPanel);
+
         // Add components to main panel
         add(deliveryLabel, BorderLayout.NORTH);
-        add(inputPanel, BorderLayout.CENTER);
+        add(centerPanel, BorderLayout.CENTER);
         add(backPanel, BorderLayout.SOUTH);
 
         // Add action listeners
