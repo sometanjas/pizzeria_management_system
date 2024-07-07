@@ -64,7 +64,7 @@ public class BookkeepingPanel extends JPanel {
         for (TransactionRecord t : allTransactions) {
             currentBalance += t.getValue();
         }
-
+        moneyInput.setText("");
         bottomline.setText(String.format("Geld auf dem Pizzeria-Konto: %d", currentBalance));
     }
 

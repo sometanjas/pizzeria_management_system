@@ -115,4 +115,14 @@ public class ZutatenBestandPanel extends JPanel {
     public JTextField getTomatoQty() {
         return tomatoQty;
     }
+
+
+    public void refreshData() {
+        tomatoQty.setText("");
+        salmoneQty.setText("");
+        schinkenQty.setText("");
+        tonnoQty.setText("");
+        onionQty.setText("");
+        doughQty.setText("");
+    }
 }

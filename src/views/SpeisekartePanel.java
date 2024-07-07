@@ -119,10 +119,6 @@ public class SpeisekartePanel extends JPanel {
                 catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-                margarettaAnzahl.setText("");
-                salmoneAnzahl.setText("");
-                schinkenAnzahl.setText("");
-                tonnoAnzahl.setText("");
                 frameManager.showCustomerReceipt();
             }
         });
@@ -136,5 +132,12 @@ public class SpeisekartePanel extends JPanel {
                 frameManager.showMainView();
             }
         });
+    }
+
+    public void refreshData() {
+        margarettaAnzahl.setText("");
+        salmoneAnzahl.setText("");
+        schinkenAnzahl.setText("");
+        tonnoAnzahl.setText("");
     }
 }

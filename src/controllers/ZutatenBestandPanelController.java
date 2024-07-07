@@ -23,7 +23,6 @@ public class ZutatenBestandPanelController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int totalValue = 0;
         IngredientOrderItem tomatoItem = new IngredientOrderItem("tomato",
                 Ingredient.getAvailableValues().get("tomato"),
                 Integer.parseInt(zutatenBestandPanel.getTomatoQty().getText()));
@@ -43,8 +42,24 @@ public class ZutatenBestandPanelController implements ActionListener {
                 Ingredient.getAvailableValues().get("dough"),
                 Integer.parseInt(zutatenBestandPanel.getDoughQty().getText()));
         List<IngredientOrderItem> items = Arrays.asList(tomatoItem, salmonItem, schinkenItem, tuneItem, onionItem, doughItem);
+
+        int totalValue = 0;
         for (IngredientOrderItem item : items) {
             totalValue += item.getQty() * item.getPrice();
+        }
+
+        List<TransactionRecord> allTransactions = TransactionsDaoDbImpl.getInstance().getAllTransactions();
+        int currentBalance = 0;
+        for (TransactionRecord t : allTransactions) {
+            currentBalance += t.getValue();
+        }
+
+        if (currentBalance < totalValue) {
+            frameManager.showWarehouseChecker();
+            return;
+        }
+
+        for (IngredientOrderItem item : items) {
             WarehouseDaoDbImpl.getInstance().depositIngredient(item.getName(), item.getQty());
         }
 

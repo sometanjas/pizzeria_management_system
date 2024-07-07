@@ -20,7 +20,10 @@ public class Main {
         // Initialize Views
         BestellungsHistoriePanel bestellungsHistoriePanel = new BestellungsHistoriePanel(frameManager);
 
-        // ZutatenBestand
+
+
+        // ZutatenBestand & WarehouseChecker (is enough money)
+        WarehouseCheckerPanel warehouseCheckerPanel = new WarehouseCheckerPanel(frameManager);
         ZutatenBestandPanel zutatenBestandPanel = new ZutatenBestandPanel(frameManager);
         ZutatenBestandPanelController zutatenBestandPanelController = new ZutatenBestandPanelController(zutatenBestandPanel, frameManager);
         zutatenBestandPanel.addBestellenButtonController(zutatenBestandPanelController);
@@ -33,6 +36,7 @@ public class Main {
         QuestionDeliveryPanel questionDeliveryPanel = new QuestionDeliveryPanel(frameManager);
         PLZPanel plzPanel = new PLZPanel(frameManager);
         PLZErrorPanel plzErrorPanel = new PLZErrorPanel(frameManager);
+
 
 
         BusinessReceiptPanel businessReceiptPanel = new BusinessReceiptPanel(frameManager);
@@ -69,7 +73,8 @@ public class Main {
                 speisekartePanel,
                 zutatenBestandPanel,
                 zutatenCheckerPanel,
-                pickupDataPanel);
+                pickupDataPanel,
+                warehouseCheckerPanel);
 
 
         // create database schema if not exist - created manually

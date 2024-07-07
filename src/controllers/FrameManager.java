@@ -22,6 +22,7 @@ public class FrameManager {
     private ZutatenBestandPanel zutatenBestandPanel;
     private ZutatenCheckerPanel zutatenCheckerPanel;
     private PickupDataPanel pickupDataPanel;
+    private WarehouseCheckerPanel warehouseCheckerPanel;
 
 
     public FrameManager() {
@@ -40,7 +41,8 @@ public class FrameManager {
                            SpeisekartePanel speisekartePanel,
                            ZutatenBestandPanel zutatenBestandPanel,
                            ZutatenCheckerPanel zutatenCheckerPanel,
-                           PickupDataPanel pickupDataPanel) {
+                           PickupDataPanel pickupDataPanel,
+                           WarehouseCheckerPanel warehouseCheckerPanel) {
         this.loginView = loginView;
         this.mainMenuPanel = mainMenuPanel;
         this.bestellungsHistoriePanel = bestellungsHistoriePanel;
@@ -55,6 +57,7 @@ public class FrameManager {
         this.zutatenBestandPanel = zutatenBestandPanel;
         this.zutatenCheckerPanel = zutatenCheckerPanel;
         this.pickupDataPanel = pickupDataPanel;
+        this.warehouseCheckerPanel = warehouseCheckerPanel;
 
         this.frame.setSize(1500, 500);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,6 +106,7 @@ public class FrameManager {
 
     public void showWarehouse() {
         this.setAllInvisible();
+        this.zutatenBestandPanel.refreshData();
         this.zutatenBestandPanel.setVisible(true);
         this.frame.getContentPane().add(this.zutatenBestandPanel);
         this.frame.revalidate();
@@ -127,6 +131,7 @@ public class FrameManager {
 
     public void showSpeisekarte() {
         this.setAllInvisible();
+        this.speisekartePanel.refreshData();
         this.speisekartePanel.setVisible(true);
         this.frame.getContentPane().add(this.speisekartePanel);
         this.frame.revalidate();
@@ -135,6 +140,7 @@ public class FrameManager {
 
     public void showDeliveryData() {
         this.setAllInvisible();
+        this.deliveryDataPanel.refreshData();
         this.deliveryDataPanel.setVisible(true);
         this.frame.getContentPane().add(this.deliveryDataPanel);
         this.frame.revalidate();
@@ -184,6 +190,14 @@ public class FrameManager {
         this.frame.repaint();
     }
 
+    public void showWarehouseChecker() {
+        this.setAllInvisible();
+        this.warehouseCheckerPanel.setVisible(true);
+        this.frame.getContentPane().add(this.warehouseCheckerPanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+
 
     private void setAllInvisible() {
         this.frame.getContentPane().invalidate();
@@ -201,5 +215,6 @@ public class FrameManager {
         this.zutatenCheckerPanel.setVisible(false);
         this.pickupDataPanel.setVisible(false);
         this.plzErrorPanel.setVisible(false);
+        this.warehouseCheckerPanel.setVisible(false);
     }
 }
