@@ -45,26 +45,31 @@ public class ZutatenBestandPanelController implements ActionListener {
                     Integer.parseInt(zutatenBestandPanel.getDoughQty().getText()));
             List<IngredientOrderItem> items = Arrays.asList(tomatoItem, salmonItem, schinkenItem, tuneItem, onionItem, doughItem);
 
+            // Ausrechnung von der bestellten Ingredients
             int totalValue = 0;
             for (IngredientOrderItem item : items) {
                 totalValue += item.getQty() * item.getPrice();
             }
 
+            // Die Geschaeftskonto-Bilanz
             List<TransactionRecord> allTransactions = TransactionsDaoDbImpl.getInstance().getAllTransactions();
             int currentBalance = 0;
             for (TransactionRecord t : allTransactions) {
                 currentBalance += t.getValue();
             }
 
+            // Die Pruefung. ob wir die Bestellung von Ingredients vollziehen koennen: (Bilanz - was bestellt wird)
             if (currentBalance < totalValue) {
                 frameManager.showWarehouseChecker();
                 return;
             }
 
+            // Warehouse update (was gekauft wird -> in Warehouse addiert)
             for (IngredientOrderItem item : items) {
                 WarehouseDaoDbImpl.getInstance().depositIngredient(item.getName(), item.getQty());
             }
 
+            // Transaction wird geschaffen und in die DB eingepflegt
             TransactionRecord transaction = TransactionRecord.NewPurchaseTransactionRecord(totalValue);
             TransactionsDaoDbImpl.getInstance().addTransaction(transaction);
 
