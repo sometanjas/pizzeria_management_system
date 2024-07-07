@@ -200,5 +200,6 @@ public class FrameManager {
         this.zutatenBestandPanel.setVisible(false);
         this.zutatenCheckerPanel.setVisible(false);
         this.pickupDataPanel.setVisible(false);
+        this.plzErrorPanel.setVisible(false);
     }
 }
