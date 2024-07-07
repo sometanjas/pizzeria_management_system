@@ -94,6 +94,7 @@ public class FrameManager {
 
     public void showBookkeeping() {
         this.setAllInvisible();
+        this.bookkeepingPanel.refreshData();
         this.bookkeepingPanel.setVisible(true);
         this.frame.getContentPane().add(this.bookkeepingPanel);
         this.frame.revalidate();

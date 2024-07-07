@@ -1,5 +1,6 @@
 package src;
 
+import src.controllers.BookkeepingController;
 import src.controllers.FrameManager;
 import src.controllers.LoginController;
 import src.ingredient.Ingredient;
@@ -17,8 +18,12 @@ public class Main {
         FrameManager frameManager = new FrameManager();
         // Initialize Views
         BestellungsHistoriePanel bestellungsHistoriePanel = new BestellungsHistoriePanel(frameManager);
-        BookkeepingPanel bookkeepingPanel = new BookkeepingPanel(frameManager);
         ZutatenBestandPanel zutatenBestandPanel = new ZutatenBestandPanel(frameManager);
+
+        // Bookkeeping
+        BookkeepingPanel bookkeepingPanel = new BookkeepingPanel(frameManager);
+        BookkeepingController bookkeepingController = new BookkeepingController(bookkeepingPanel);
+        bookkeepingPanel.addDepositMoneyButtonController(bookkeepingController);
 
         QuestionDeliveryPanel questionDeliveryPanel = new QuestionDeliveryPanel(frameManager);
         PLZPanel plzPanel = new PLZPanel(frameManager);
