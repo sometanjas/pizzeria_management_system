@@ -2,26 +2,6 @@
 skinparam classAttributeIconSize 0
 
 
-Warehouse *-- Ingredient
-
-class Warehouse {
--IngredientCheese cheese
--IngredientSalmon salmon
--IngredientDough dough
-+Warehouse()
-+boolean withdrawIngredients(Order order)
-+boolean isThresholdViolated()
--boolean isEnoughCapacityForOrder(Order order)
--boolean isEnoughIngredients(ArrayList<Ingredient> inputIngrs, int multiplier)
-+ArrayList<Ingredient> getIngredients()
-.. Some setter & getter ..
-+IngredientSalmon getSalmon()
-+void setSalmon(IngredientSalmon salmon)
-+IngredientDough getDough()
-+void setDough(IngredientDough dough)
-+IngredientCheese getCheese()
-+void setCheese(IngredientCheese cheese)
-}
 
 Order o-- OrderItem
 
@@ -71,16 +51,5 @@ class PizzaSalmone implements PizzaInterface {
 	+void build()
 	+int getPrice()
 	+ArrayList<Ingredient> getIngredients()
-}
-
-class IngredientCheese extends Ingredient {
-	+IngredientCheese(int value)
-	}
-
-class IngredientSalmon extends Ingredient {
-	+IngredientSalmon(int value)
-}
-class IngredientDough extends Ingredient {
-	+IngredientDough(int value)
 }
 @enduml

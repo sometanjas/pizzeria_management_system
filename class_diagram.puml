@@ -5,7 +5,6 @@ FrameManager o-- MainMenuController
 MainMenuPanel *-- MainMenuController
 FrameManager o-- ZutatenBestandController
 ZutatenBestandPanel *-- ZutatenBestandController
-Warehouse o-- ZutatenBestandController
 
 class ZutatenBestandController implements ActionListener
 
@@ -33,7 +32,6 @@ class FrameManager {
 + void showQuestionDelivery()
 + void showBestellungsHistorie()
 + void showBookkeeping()
-+ void showWarehouse()
 + void showLogin()
 ..some methods..
 + void showMainView()
