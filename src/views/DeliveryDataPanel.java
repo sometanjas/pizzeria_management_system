@@ -24,6 +24,7 @@ public class DeliveryDataPanel extends JPanel {
     private JTextField telefonInput = new JTextField(20);
     private JButton nextButton = new JButton("Weiter");
     private JButton killSwitchButton = new JButton("Abbruch");
+    private JLabel wrongInput = new JLabel("");
 
     public DeliveryDataPanel(FrameManager frameManager) {
         super(new BorderLayout());
@@ -69,6 +70,7 @@ public class DeliveryDataPanel extends JPanel {
         inputPanel.add(telefonInput);
         inputPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         inputPanel.add(nextButton);
+        inputPanel.add(wrongInput);
 
         // Panel for kill switch button
         JPanel killSwitchPanel = new JPanel(new BorderLayout());
@@ -84,6 +86,13 @@ public class DeliveryDataPanel extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    int number = Integer.parseInt(floorInput.getText());
+                } catch (NumberFormatException ex) {
+                    wrongInput.setText("Ungültige Eingabe!");
+                    wrongInput.setForeground(Color.RED);
+                    return;
+                }
                 Order.getInstance().setFirstname(firstnameInput.getText());
                 Order.getInstance().setSecondname(secondnameInput.getText());
                 Order.getInstance().setAddress(addressInput.getText());
@@ -99,6 +108,10 @@ public class DeliveryDataPanel extends JPanel {
                 frameManager.showMainView();
             }
         });
+    }
+
+    public JLabel getWrongInput() {
+        return wrongInput;
     }
 
     public void refreshData() {
