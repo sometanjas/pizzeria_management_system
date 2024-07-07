@@ -3,6 +3,7 @@ package src;
 import src.controllers.BookkeepingController;
 import src.controllers.FrameManager;
 import src.controllers.LoginController;
+import src.controllers.ZutatenBestandPanelController;
 import src.ingredient.Ingredient;
 import src.model.Order;
 import src.model.OrderItem;
@@ -18,7 +19,11 @@ public class Main {
         FrameManager frameManager = new FrameManager();
         // Initialize Views
         BestellungsHistoriePanel bestellungsHistoriePanel = new BestellungsHistoriePanel(frameManager);
+
+        // ZutatenBestand
         ZutatenBestandPanel zutatenBestandPanel = new ZutatenBestandPanel(frameManager);
+        ZutatenBestandPanelController zutatenBestandPanelController = new ZutatenBestandPanelController(zutatenBestandPanel, frameManager);
+        zutatenBestandPanel.addBestellenButtonController(zutatenBestandPanelController);
 
         // Bookkeeping
         BookkeepingPanel bookkeepingPanel = new BookkeepingPanel(frameManager);

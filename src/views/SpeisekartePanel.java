@@ -79,12 +79,12 @@ public class SpeisekartePanel extends JPanel {
         weiterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PizzaMargaretta margatetta = new PizzaMargaretta();
+                PizzaMargaretta margaretta = new PizzaMargaretta();
                 PizzaSalmone salmone = new PizzaSalmone();
                 PizzaSchinken schinken = new PizzaSchinken();
                 PizzaTonno tonno = new PizzaTonno();
                 try {
-                    margatetta.build();
+                    margaretta.build();
                     salmone.build();
                     schinken.build();
                     tonno.build();
@@ -93,7 +93,7 @@ public class SpeisekartePanel extends JPanel {
                     throw new RuntimeException(ex);
                 }
                 ArrayList<OrderItem> items = new ArrayList<>();
-                OrderItem margatettaItem = new OrderItem(margatetta, Integer.parseInt(margarettaAnzahl.getText()));
+                OrderItem margatettaItem = new OrderItem(margaretta, Integer.parseInt(margarettaAnzahl.getText()));
                 if (margatettaItem.getQuantity() > 0) {
                     items.add(margatettaItem);
                 }

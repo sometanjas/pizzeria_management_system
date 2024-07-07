@@ -1,19 +1,12 @@
 package src.views;
 
 import src.controllers.FrameManager;
-import src.ingredient.Ingredient;
-import src.ingredient.IngredientOrderItem;
-import src.storage.transactions.TransactionRecord;
-import src.storage.transactions.TransactionsDaoDbImpl;
-import src.storage.warehouse.WarehouseDaoDbImpl;
+import src.controllers.ZutatenBestandPanelController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ZutatenBestandPanel extends JPanel {
     private FrameManager frameManager;
@@ -44,6 +37,7 @@ public class ZutatenBestandPanel extends JPanel {
     private JTextField schinkenQty = new JTextField(20);
     private JTextField tonnoQty = new JTextField(20);
     private JTextField onionQty = new JTextField(20);
+
     private JTextField doughQty = new JTextField(20);
 
     public ZutatenBestandPanel(FrameManager frameManager) {
@@ -86,45 +80,39 @@ public class ZutatenBestandPanel extends JPanel {
         companyLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
         add(panel);
 
-        bestellenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int totalValue = 0;
-                IngredientOrderItem tomatoItem = new IngredientOrderItem("tomato",
-                        Ingredient.getAvailableValues().get("tomato"),
-                        Integer.parseInt(tomatoQty.getText()));
-                IngredientOrderItem salmonItem = new IngredientOrderItem("salmon",
-                        Ingredient.getAvailableValues().get("salmon"),
-                        Integer.parseInt(salmoneQty.getText()));
-                IngredientOrderItem schinkenItem = new IngredientOrderItem("schinken",
-                        Ingredient.getAvailableValues().get("schinken"),
-                        Integer.parseInt(schinkenQty.getText()));
-                IngredientOrderItem tuneItem = new IngredientOrderItem("tune",
-                        Ingredient.getAvailableValues().get("tune"),
-                        Integer.parseInt(tonnoQty.getText()));
-                IngredientOrderItem onionItem = new IngredientOrderItem("onion",
-                        Ingredient.getAvailableValues().get("onion"),
-                        Integer.parseInt(onionQty.getText()));
-                IngredientOrderItem doughItem = new IngredientOrderItem("dough",
-                        Ingredient.getAvailableValues().get("dough"),
-                        Integer.parseInt(doughQty.getText()));
-                List<IngredientOrderItem> items = Arrays.asList(tomatoItem, salmonItem, schinkenItem, tuneItem, onionItem, doughItem);
-                for (IngredientOrderItem item : items) {
-                    totalValue += item.getQty() * item.getPrice();
-                }
-
-                TransactionRecord transaction = TransactionRecord.NewPurchaseTransactionRecord(totalValue);
-                TransactionsDaoDbImpl.getInstance().addTransaction(transaction);
-
-                frameManager.showBusinessReceiptPanel(items);
-            }
-        });
-
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameManager.showMainView();
             }
         });
+    }
+
+    public void addBestellenButtonController(ZutatenBestandPanelController controller) {
+        bestellenButton.addActionListener(controller);
+    }
+
+    public JTextField getTonnoQty() {
+        return tonnoQty;
+    }
+
+    public JTextField getSchinkenQty() {
+        return schinkenQty;
+    }
+
+    public JTextField getSalmoneQty() {
+        return salmoneQty;
+    }
+
+    public JTextField getOnionQty() {
+        return onionQty;
+    }
+
+    public JTextField getDoughQty() {
+        return doughQty;
+    }
+
+    public JTextField getTomatoQty() {
+        return tomatoQty;
     }
 }
