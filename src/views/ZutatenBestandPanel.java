@@ -2,14 +2,24 @@ package src.views;
 
 import src.controllers.FrameManager;
 import src.controllers.ZutatenBestandPanelController;
+import src.ingredient.Ingredient;
+import src.storage.order.OrderDaoDbImpl;
+import src.storage.order.OrderRecord;
+import src.storage.transactions.TransactionRecord;
+import src.storage.transactions.TransactionsDaoDbImpl;
+import src.storage.warehouse.WarehouseDaoDbImpl;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ZutatenBestandPanel extends JPanel {
     private FrameManager frameManager;
+
+    private DefaultTableModel tableModel = new DefaultTableModel();
 
     private JLabel companyLabel = new JLabel("Zutaten-Bestellen", SwingConstants.CENTER);
     private JButton bestellenButton = new JButton("Bestellen");
@@ -46,6 +56,12 @@ public class ZutatenBestandPanel extends JPanel {
         panel.setBorder(BorderFactory.createEmptyBorder(50, 600, 50, 600));
         setBackground(Color.WHITE);
 
+        this.refreshData();
+
+        JTable table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        panel.add(scrollPane);
+
         tomatoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         tomatoQty.setAlignmentX(Component.CENTER_ALIGNMENT);
         salmoneLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -58,6 +74,7 @@ public class ZutatenBestandPanel extends JPanel {
         onionQty.setAlignmentX(Component.CENTER_ALIGNMENT);
         doughLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         doughQty.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 
         panel.add(tomatoLabel);
         panel.add(tomatoQty);
@@ -132,6 +149,16 @@ public class ZutatenBestandPanel extends JPanel {
 
 
     public void refreshData() {
+        String[] header = new String[]{
+                "Zutaten", "Value"
+        };
+        this.tableModel.setDataVector(new Object[][]{}, header);
+        List<Ingredient> availableIngrs = WarehouseDaoDbImpl.getInstance().getAllIngredients();
+        for (Ingredient i : availableIngrs) {
+            Object[] rowData = {i.getName(), i.getValue()};
+            tableModel.addRow(rowData);
+        }
+
         tomatoQty.setText("");
         salmoneQty.setText("");
         schinkenQty.setText("");
