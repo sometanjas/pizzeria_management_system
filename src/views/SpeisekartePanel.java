@@ -31,6 +31,8 @@ public class SpeisekartePanel extends JPanel {
     private JButton weiterButton = new JButton("Weiter");
     private JButton killswitchButton = new JButton("Abbruch");
 
+    private JLabel wrongInput = new JLabel("");
+
     public SpeisekartePanel(FrameManager frameManager) {
         super(new BorderLayout());
         this.frameManager = frameManager;
@@ -65,6 +67,7 @@ public class SpeisekartePanel extends JPanel {
         panel.add(tonnoAnzahl);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(weiterButton);
+        panel.add(wrongInput);
 
         // Panel for kill switch button
         JPanel killSwitchPanel = new JPanel(new BorderLayout());
@@ -79,47 +82,51 @@ public class SpeisekartePanel extends JPanel {
         weiterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PizzaMargaretta margaretta = new PizzaMargaretta();
-                PizzaSalmone salmone = new PizzaSalmone();
-                PizzaSchinken schinken = new PizzaSchinken();
-                PizzaTonno tonno = new PizzaTonno();
                 try {
-                    margaretta.build();
-                    salmone.build();
-                    schinken.build();
-                    tonno.build();
+                    PizzaMargaretta margaretta = new PizzaMargaretta();
+                    PizzaSalmone salmone = new PizzaSalmone();
+                    PizzaSchinken schinken = new PizzaSchinken();
+                    PizzaTonno tonno = new PizzaTonno();
+                    try {
+                        margaretta.build();
+                        salmone.build();
+                        schinken.build();
+                        tonno.build();
 
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    ArrayList<OrderItem> items = new ArrayList<>();
+                    OrderItem margatettaItem = new OrderItem(margaretta, Integer.parseInt(margarettaAnzahl.getText()));
+                    if (margatettaItem.getQuantity() > 0) {
+                        items.add(margatettaItem);
+                    }
+                    OrderItem salmoneItem = new OrderItem(salmone, Integer.parseInt(salmoneAnzahl.getText()));
+                    if (salmoneItem.getQuantity() > 0) {
+                        items.add(salmoneItem);
+                    }
+                    OrderItem schinkenItem = new OrderItem(schinken, Integer.parseInt(schinkenAnzahl.getText()));
+                    if (schinkenItem.getQuantity() > 0) {
+                        items.add(schinkenItem);
+                    }
+                    OrderItem tonnoItem = new OrderItem(tonno, Integer.parseInt(tonnoAnzahl.getText()));
+                    if (tonnoItem.getQuantity() > 0) {
+                        items.add(tonnoItem);
+                    }
+                    Order.getInstance().setItems(items);
+                    try {
+                        Order.getInstance().save();
+                    } catch (NotEnoughIngrsException exp) {
+                        frameManager.showZutatenCheckerPanel();
+                        return;
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    frameManager.showCustomerReceipt();
+                } catch (NumberFormatException ex) {
+                    wrongInput.setText("Ungültige Eingabe");
+                    wrongInput.setForeground(Color.RED);
                 }
-                ArrayList<OrderItem> items = new ArrayList<>();
-                OrderItem margatettaItem = new OrderItem(margaretta, Integer.parseInt(margarettaAnzahl.getText()));
-                if (margatettaItem.getQuantity() > 0) {
-                    items.add(margatettaItem);
-                }
-                OrderItem salmoneItem = new OrderItem(salmone, Integer.parseInt(salmoneAnzahl.getText()));
-                if (salmoneItem.getQuantity() > 0) {
-                    items.add(salmoneItem);
-                }
-                OrderItem schinkenItem = new OrderItem(schinken, Integer.parseInt(schinkenAnzahl.getText()));
-                if (schinkenItem.getQuantity() > 0) {
-                    items.add(schinkenItem);
-                }
-                OrderItem tonnoItem = new OrderItem(tonno, Integer.parseInt(tonnoAnzahl.getText()));
-                if (tonnoItem.getQuantity() > 0) {
-                    items.add(tonnoItem);
-                }
-                Order.getInstance().setItems(items);
-                try {
-                    Order.getInstance().save();
-                } catch (NotEnoughIngrsException exp) {
-                    frameManager.showZutatenCheckerPanel();
-                    return;
-                }
-                catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-                frameManager.showCustomerReceipt();
             }
         });
 

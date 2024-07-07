@@ -30,6 +30,8 @@ public class ZutatenBestandPanel extends JPanel {
     private JTextField onionQty = new JTextField(15);
     private JTextField doughQty = new JTextField(15);
 
+    private JLabel wrongInput = new JLabel("");
+
     public ZutatenBestandPanel(FrameManager frameManager) {
 
         super(new BorderLayout());
@@ -76,6 +78,7 @@ public class ZutatenBestandPanel extends JPanel {
         panel.add(doughQty);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(bestellenButton);
+        panel.add(wrongInput);
 
         // Panel for kill switch button
         JPanel killSwitchPanel = new JPanel(new BorderLayout());
@@ -96,6 +99,9 @@ public class ZutatenBestandPanel extends JPanel {
         });
     }
 
+    public JLabel getWrongInput() {
+        return wrongInput;
+    }
     public void addBestellenButtonController(ZutatenBestandPanelController controller) {
         bestellenButton.addActionListener(controller);
     }
