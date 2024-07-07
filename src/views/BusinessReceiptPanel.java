@@ -13,7 +13,7 @@ public class BusinessReceiptPanel extends JPanel {
 
     private FrameManager frameManager;
     private JLabel companyLabel = new JLabel("Business Receipt");
-    private JButton backButton = new JButton("Zurueck zum Hauptmenu");
+    private JButton backButton = new JButton("Zurück zum Hauptmenu");
 
     private DefaultTableModel tableModel = new DefaultTableModel();
 

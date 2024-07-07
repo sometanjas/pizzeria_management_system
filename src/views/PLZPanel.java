@@ -18,7 +18,7 @@ public class PLZPanel extends JPanel {
     private JLabel plzLabel = new JLabel("Geben Sie die PLZ ein", SwingConstants.CENTER);
     private JTextField plzInput = new JTextField(10); // Set preferred size by columns
     private JButton checkerButton = new JButton("Checken");
-    private JButton backButton = new JButton("Zurueck");
+    private JButton backButton = new JButton("Zurück");
     private JLabel statusLabel = new JLabel("", SwingConstants.CENTER);
 
     private PostLeitZahlChecker plzChecker;

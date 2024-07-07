@@ -10,77 +10,85 @@ import java.awt.event.ActionListener;
 
 public class ZutatenBestandPanel extends JPanel {
     private FrameManager frameManager;
-    private JLabel companyLabel = new JLabel("Zutaten-Bestellen");
+
+    private JLabel companyLabel = new JLabel("Zutaten-Bestellen", SwingConstants.CENTER);
     private JButton bestellenButton = new JButton("Bestellen");
-    private JButton backButton = new JButton("Zurueck");
+    private JButton killSwitchButton = new JButton("Zurück");
 
-    private JLabel ingrLabel = new JLabel("Ingredients:");
-    private JLabel preisLabel = new JLabel("Preis:");
-    private JLabel anzahlLabel = new JLabel("Anzahl:");
 
-    private JLabel tomato = new JLabel("Tomaten");
-    private JLabel salmone = new JLabel("Salmone");
-    private JLabel schinken = new JLabel("Schinken");
-    private JLabel tonno = new JLabel("Tonno");
-    private JLabel onion = new JLabel("Onion");
-    private JLabel dough = new JLabel("Dough");
+    private JLabel tomatoLabel = new JLabel("Tomaten: 5 Euro / 1 kg");
+    private JLabel salmoneLabel = new JLabel("Salmone: 20 Euro / 1 kg");
+    private JLabel schinkenLabel = new JLabel("Schinken: 12 Euro / 1 kg");
+    private JLabel tonnoLabel = new JLabel("Tonno: 12 Euro / 1 kg");
+    private JLabel onionLabel = new JLabel("Onion: 5 Euro / 1 kg");
+    private JLabel doughLabel = new JLabel("Dough: 4 Euro / 1 kg");
 
-    private JLabel tomatoPreis = new JLabel("5 Euro / 1 kg");
-    private JLabel salmonePreis = new JLabel("20 Euro / 1 kg");
-    private JLabel schinkenPreis = new JLabel("12 Euro / 1 kg");
-    private JLabel tonnoPreis = new JLabel("12 Euro / 1 kg");
-    private JLabel onionPreis = new JLabel("5 Euro / 1 kg");
-    private JLabel doughPreis = new JLabel("4 Euro / 1 kg");
-
-    private JTextField tomatoQty = new JTextField(20);
-    private JTextField salmoneQty = new JTextField(20);
-    private JTextField schinkenQty = new JTextField(20);
-    private JTextField tonnoQty = new JTextField(20);
-    private JTextField onionQty = new JTextField(20);
-
-    private JTextField doughQty = new JTextField(20);
+    private JTextField tomatoQty = new JTextField(15);
+    private JTextField salmoneQty = new JTextField(15);
+    private JTextField schinkenQty = new JTextField(15);
+    private JTextField tonnoQty = new JTextField(15);
+    private JTextField onionQty = new JTextField(15);
+    private JTextField doughQty = new JTextField(15);
 
     public ZutatenBestandPanel(FrameManager frameManager) {
 
-        super();
+        super(new BorderLayout());
         this.frameManager = frameManager;
-
-        // Layout setup
-
         setBackground(Color.WHITE);
+
+        companyLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+
         JPanel panel = new JPanel();
-        panel.add(companyLabel);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createEmptyBorder(50, 600, 50, 600));
+        setBackground(Color.WHITE);
 
-        add(ingrLabel);
-        add(preisLabel);
-        add(anzahlLabel);
+        tomatoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tomatoQty.setAlignmentX(Component.CENTER_ALIGNMENT);
+        salmoneLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        salmoneQty.setAlignmentX(Component.CENTER_ALIGNMENT);
+        schinkenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        schinkenQty.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tonnoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tonnoQty.setAlignmentX(Component.CENTER_ALIGNMENT);
+        onionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        onionQty.setAlignmentX(Component.CENTER_ALIGNMENT);
+        doughLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        doughQty.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        add(tomato);
-        add(tomatoPreis);
-        add(tomatoQty);
-        add(salmone);
-        add(salmonePreis);
-        add(salmoneQty);
-        add(schinken);
-        add(schinkenPreis);
-        add(schinkenQty);
-        add(tonno);
-        add(tonnoPreis);
-        add(tonnoQty);
-        add(onion);
-        add(onionPreis);
-        add(onionQty);
-        add(dough);
-        add(doughPreis);
-        add(doughQty);
-
+        panel.add(tomatoLabel);
+        panel.add(tomatoQty);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(salmoneLabel);
+        panel.add(salmoneQty);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(schinkenLabel);
+        panel.add(schinkenQty);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(tonnoLabel);
+        panel.add(tonnoQty);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(onionLabel);
+        panel.add(onionQty);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(doughLabel);
+        panel.add(doughQty);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(bestellenButton);
-        panel.add(backButton);
-        panel.setVisible(true);
-        companyLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
-        add(panel);
 
-        backButton.addActionListener(new ActionListener() {
+        // Panel for kill switch button
+        JPanel killSwitchPanel = new JPanel(new BorderLayout());
+        killSwitchPanel.setBackground(Color.WHITE);
+        killSwitchPanel.add(killSwitchButton, BorderLayout.WEST);
+
+        add(companyLabel, BorderLayout.NORTH);
+        add(panel, BorderLayout.CENTER);
+        add(killSwitchPanel, BorderLayout.SOUTH);
+
+
+
+        killSwitchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameManager.showMainView();

@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class CustomerReceiptPanel extends JPanel {
     private FrameManager frameManager;
     private JLabel companyLabel = new JLabel("CustomerReceipt");
-    private JButton backButton = new JButton("Zurueck zum Hauptmenu");
+    private JButton backButton = new JButton("Zurück zum Hauptmenu");
 
     private DefaultTableModel tableModel = new DefaultTableModel();
 

@@ -21,9 +21,9 @@ public class BookkeepingPanel extends JPanel {
 
     private JTextField moneyInput = new JTextField(20);
 
-    private JButton depositMoneyButton = new JButton("Bestaetigen");
+    private JButton depositMoneyButton = new JButton("Bestellung bestätigen");
 
-    private JButton backButton = new JButton("Zurueck");
+    private JButton backButton = new JButton("Zurück");
 
     public BookkeepingPanel(FrameManager frameManager) {
 

@@ -15,7 +15,7 @@ public class BestellungsHistoriePanel extends JPanel {
     private FrameManager frameManager;
     private JLabel companyLabel = new JLabel("Bestellungshistorie");
 
-    private JButton backButton = new JButton("Zurueck");
+    private JButton backButton = new JButton("Zurück");
     private DefaultTableModel tableModel = new DefaultTableModel();
 
     public BestellungsHistoriePanel(FrameManager frameManager) {

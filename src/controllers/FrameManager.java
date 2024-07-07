@@ -59,7 +59,7 @@ public class FrameManager {
         this.pickupDataPanel = pickupDataPanel;
         this.warehouseCheckerPanel = warehouseCheckerPanel;
 
-        this.frame.setSize(1500, 500);
+        this.frame.setSize(1500, 600);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setAllInvisible();

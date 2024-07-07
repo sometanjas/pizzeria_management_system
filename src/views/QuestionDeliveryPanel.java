@@ -14,7 +14,7 @@ public class QuestionDeliveryPanel extends JPanel {
     private JLabel companyLabel = new JLabel("Pizza Restaurant Management System", SwingConstants.CENTER);
     private JButton deliveryButton = new JButton("Lieferung");
     private JButton pickupButton = new JButton("Selbstabholung");
-    private JButton backButton = new JButton("Zurueck");
+    private JButton backButton = new JButton("Zurück");
 
     public QuestionDeliveryPanel(FrameManager frameManager) {
         super(new BorderLayout());
