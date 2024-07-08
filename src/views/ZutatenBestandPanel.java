@@ -35,6 +35,7 @@ public class ZutatenBestandPanel extends JPanel {
     private JTextField tonnoQty = new JTextField(5);
     private JTextField onionQty = new JTextField(5);
     private JTextField doughQty = new JTextField(5);
+
     private JTextField cheeseQty = new JTextField(5);
 
     private JLabel wrongInput = new JLabel("");
@@ -138,6 +139,10 @@ public class ZutatenBestandPanel extends JPanel {
 
     public JTextField getTomatoQty() {
         return tomatoQty;
+    }
+
+    public JTextField getCheeseQty() {
+        return cheeseQty;
     }
 
     public void refreshData() {

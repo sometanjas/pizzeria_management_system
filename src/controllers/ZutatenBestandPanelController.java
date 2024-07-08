@@ -45,7 +45,7 @@ public class ZutatenBestandPanelController implements ActionListener {
                     Integer.parseInt(zutatenBestandPanel.getDoughQty().getText()));
             IngredientOrderItem cheeseItem = new IngredientOrderItem("cheese",
                     Ingredient.getAvailableValues().get("cheese"),
-                    Integer.parseInt(zutatenBestandPanel.getDoughQty().getText()));
+                    Integer.parseInt(zutatenBestandPanel.getCheeseQty().getText()));
 
             List<IngredientOrderItem> items = Arrays.asList(tomatoItem, salmonItem, schinkenItem, tuneItem, onionItem, doughItem, cheeseItem);
 
