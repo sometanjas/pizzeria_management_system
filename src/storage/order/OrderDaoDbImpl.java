@@ -72,9 +72,6 @@ public class OrderDaoDbImpl implements OrderDao {
     @Override
     public int addOrder(OrderRecord orderRecord) {
         String sql = "INSERT INTO orders (lieferung, plz, firstname, secondname, address, floor, telefon, sum) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-//        String sql = "INSERT INTO orders (lieferung, plz, firstname, secondname, address, floor, telefon, sum, orderid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        if (orderRecord.getOrderID() != 0) {
-//        }
 
         Connection connection = null;
         PreparedStatement statement = null;
