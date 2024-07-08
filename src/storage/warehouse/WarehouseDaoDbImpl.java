@@ -113,38 +113,4 @@ public class WarehouseDaoDbImpl implements WarehouseDao {
             }
         }
     }
-
-    @Override
-    public void addIngredient(String name, int delta) {
-        String sql = """
-                INSERT INTO warehouse (value, name)
-                SELECT ?, ?
-                FROM dual
-                WHERE NOT EXISTS (
-                    SELECT 1 FROM warehouse WHERE name = ?
-                )
-                """;
-
-        Connection connection = null;
-        PreparedStatement statement = null;
-
-        try {
-            connection = OracleDsSingleton.getInstance().getConnection();
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, delta);
-            statement.setString(2, name);
-            statement.setString(3, name);
-
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

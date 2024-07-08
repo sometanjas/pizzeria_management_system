@@ -11,5 +11,4 @@ public interface WarehouseDao {
 
     void depositIngredient(String name, int delta);
 
-    void addIngredient(String name, int delta);
 }
