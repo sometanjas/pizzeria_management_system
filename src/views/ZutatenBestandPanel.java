@@ -3,10 +3,6 @@ package src.views;
 import src.controllers.FrameManager;
 import src.controllers.ZutatenBestandPanelController;
 import src.ingredient.Ingredient;
-import src.storage.order.OrderDaoDbImpl;
-import src.storage.order.OrderRecord;
-import src.storage.transactions.TransactionRecord;
-import src.storage.transactions.TransactionsDaoDbImpl;
 import src.storage.warehouse.WarehouseDaoDbImpl;
 
 import javax.swing.*;
@@ -25,7 +21,6 @@ public class ZutatenBestandPanel extends JPanel {
     private JButton bestellenButton = new JButton("Bestellen");
     private JButton killSwitchButton = new JButton("Zurück");
 
-
     private JLabel tomatoLabel = new JLabel("Tomaten: 5 Euro / 1 kg");
     private JLabel salmoneLabel = new JLabel("Salmone: 20 Euro / 1 kg");
     private JLabel schinkenLabel = new JLabel("Schinken: 12 Euro / 1 kg");
@@ -43,70 +38,52 @@ public class ZutatenBestandPanel extends JPanel {
     private JLabel wrongInput = new JLabel("");
 
     public ZutatenBestandPanel(FrameManager frameManager) {
-
         super(new BorderLayout());
         this.frameManager = frameManager;
         setBackground(Color.WHITE);
 
         companyLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createEmptyBorder(50, 600, 50, 600));
-        setBackground(Color.WHITE);
+        JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setBackground(Color.WHITE);
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        this.refreshData();
+        leftPanel.add(tomatoLabel);
+        leftPanel.add(tomatoQty);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        leftPanel.add(salmoneLabel);
+        leftPanel.add(salmoneQty);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        leftPanel.add(schinkenLabel);
+        leftPanel.add(schinkenQty);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        leftPanel.add(tonnoLabel);
+        leftPanel.add(tonnoQty);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        leftPanel.add(onionLabel);
+        leftPanel.add(onionQty);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        leftPanel.add(doughLabel);
+        leftPanel.add(doughQty);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        leftPanel.add(bestellenButton);
+        leftPanel.add(wrongInput);
 
         JTable table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
-        panel.add(scrollPane);
 
-        tomatoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        tomatoQty.setAlignmentX(Component.CENTER_ALIGNMENT);
-        salmoneLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        salmoneQty.setAlignmentX(Component.CENTER_ALIGNMENT);
-        schinkenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        schinkenQty.setAlignmentX(Component.CENTER_ALIGNMENT);
-        tonnoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        tonnoQty.setAlignmentX(Component.CENTER_ALIGNMENT);
-        onionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        onionQty.setAlignmentX(Component.CENTER_ALIGNMENT);
-        doughLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        doughQty.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.add(scrollPane, BorderLayout.CENTER);
 
-
-        panel.add(tomatoLabel);
-        panel.add(tomatoQty);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(salmoneLabel);
-        panel.add(salmoneQty);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(schinkenLabel);
-        panel.add(schinkenQty);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(tonnoLabel);
-        panel.add(tonnoQty);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(onionLabel);
-        panel.add(onionQty);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(doughLabel);
-        panel.add(doughQty);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(bestellenButton);
-        panel.add(wrongInput);
-
-        // Panel for kill switch button
-        JPanel killSwitchPanel = new JPanel(new BorderLayout());
+        JPanel killSwitchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         killSwitchPanel.setBackground(Color.WHITE);
-        killSwitchPanel.add(killSwitchButton, BorderLayout.WEST);
+        killSwitchPanel.add(killSwitchButton);
 
         add(companyLabel, BorderLayout.NORTH);
-        add(panel, BorderLayout.CENTER);
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.CENTER);
         add(killSwitchPanel, BorderLayout.SOUTH);
-
-
 
         killSwitchButton.addActionListener(new ActionListener() {
             @Override
@@ -114,11 +91,14 @@ public class ZutatenBestandPanel extends JPanel {
                 frameManager.showMainView();
             }
         });
+
+        this.refreshData();
     }
 
     public JLabel getWrongInput() {
         return wrongInput;
     }
+
     public void addBestellenButtonController(ZutatenBestandPanelController controller) {
         bestellenButton.addActionListener(controller);
     }
@@ -146,7 +126,6 @@ public class ZutatenBestandPanel extends JPanel {
     public JTextField getTomatoQty() {
         return tomatoQty;
     }
-
 
     public void refreshData() {
         String[] header = new String[]{
