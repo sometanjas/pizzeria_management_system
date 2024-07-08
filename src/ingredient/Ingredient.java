@@ -73,7 +73,6 @@ public class Ingredient {
     }
 
     public static Ingredient NewTuneIngredient(int value) throws Exception {
-        Map<String, Integer> availableValues = Ingredient.getAvailableValues();
         return new Ingredient("tune", value);
     }
 }

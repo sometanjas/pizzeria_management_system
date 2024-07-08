@@ -9,9 +9,6 @@ import src.views.*;
 
 public class Main {
     public static void main(String[] args) {
-
-        System.out.println("CHECK");
-
         // create a controller containing the main frame
         FrameManager frameManager = new FrameManager();
         // Initialize Views
