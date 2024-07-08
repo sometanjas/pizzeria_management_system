@@ -27,6 +27,7 @@ public class ZutatenBestandPanel extends JPanel {
     private JLabel tonnoLabel = new JLabel("Tonno: 12 Euro / 1 kg");
     private JLabel onionLabel = new JLabel("Onion: 5 Euro / 1 kg");
     private JLabel doughLabel = new JLabel("Dough: 4 Euro / 1 kg");
+    private JLabel cheeseLabel = new JLabel("Cheese: 5 Euro / 1 kg");
 
     private JTextField tomatoQty = new JTextField(5);
     private JTextField salmoneQty = new JTextField(5);
@@ -34,6 +35,7 @@ public class ZutatenBestandPanel extends JPanel {
     private JTextField tonnoQty = new JTextField(5);
     private JTextField onionQty = new JTextField(5);
     private JTextField doughQty = new JTextField(5);
+    private JTextField cheeseQty = new JTextField(5);
 
     private JLabel wrongInput = new JLabel("");
 
@@ -57,6 +59,7 @@ public class ZutatenBestandPanel extends JPanel {
         tonnoQty.setPreferredSize(textFieldSize);
         onionQty.setPreferredSize(textFieldSize);
         doughQty.setPreferredSize(textFieldSize);
+        cheeseQty.setPreferredSize(textFieldSize);
 
         // Set preferred size for the "Bestellen" button to reduce size
         bestellenButton.setPreferredSize(new Dimension(30, 10));
@@ -73,6 +76,8 @@ public class ZutatenBestandPanel extends JPanel {
         leftPanel.add(onionQty);
         leftPanel.add(doughLabel);
         leftPanel.add(doughQty);
+        leftPanel.add(cheeseLabel);
+        leftPanel.add(cheeseQty);
         leftPanel.add(bestellenButton);
         leftPanel.add(wrongInput);
 
