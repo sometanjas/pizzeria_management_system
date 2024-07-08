@@ -90,7 +90,7 @@ public class WarehouseDaoDbImpl implements WarehouseDao {
 
     @Override
     public void depositIngredient(String name, int delta) {
-        String sql = "UPDATE warehouse SET value = value + ? WHERE name = ?";
+        String sql = "UPDATE warehouse SET value = value + 1000 * ? WHERE name = ?";
 
         Connection connection = null;
         PreparedStatement statement = null;
