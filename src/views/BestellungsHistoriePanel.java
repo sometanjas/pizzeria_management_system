@@ -19,33 +19,38 @@ public class BestellungsHistoriePanel extends JPanel {
     private DefaultTableModel tableModel = new DefaultTableModel();
 
     public BestellungsHistoriePanel(FrameManager frameManager) {
-
-        super();
+        super(new BorderLayout());
         this.frameManager = frameManager;
 
-        // Layout setup
+        // Header
+        companyLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+        companyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(Color.WHITE);
+        headerPanel.add(companyLabel, BorderLayout.CENTER);
+        add(headerPanel, BorderLayout.NORTH);
 
-        setBackground(Color.WHITE);
-        JPanel panel = new JPanel();
-        panel.add(companyLabel);
-        panel.add(backButton);
-        panel.setVisible(true);
-        companyLabel.setFont(new Font("SansSerif", Font.ITALIC, 14));
-        add(panel);
-
-
-        this.refreshData();
-
+        // Table
         JTable table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane);
+        add(scrollPane, BorderLayout.CENTER);
 
+        // Footer
+        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        footerPanel.setBackground(Color.WHITE);
+        footerPanel.add(backButton);
+        add(footerPanel, BorderLayout.SOUTH);
+
+        // ActionListener
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameManager.showMainView();
             }
         });
+
+        // Initial Data Load
+        this.refreshData();
     }
 
     public void refreshData() {
@@ -55,7 +60,10 @@ public class BestellungsHistoriePanel extends JPanel {
         this.tableModel.setDataVector(new Object[][]{}, header);
         List<OrderRecord> allOrders = OrderDaoDbImpl.getInstance().getAllOrders();
         for (OrderRecord o : allOrders) {
-            Object[] rowData = {o.getOrderID(), o.getSum(), o.isLieferung(), o.getAddress(), o.getFloor(), o.getPlz(), o.getTelefon(), o.getFirstname(), o.getSecondname()};
+            Object[] rowData = {
+                    o.getOrderID(), o.getSum(), o.isLieferung(), o.getAddress(), o.getFloor(), o.getPlz(), o.getTelefon(),
+                    o.getFirstname(), o.getSecondname()
+            };
             tableModel.addRow(rowData);
         }
     }
