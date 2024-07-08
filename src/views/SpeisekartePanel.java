@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class SpeisekartePanel extends JPanel {
 
-
     private FrameManager frameManager;
     private JLabel speiseKarteLabel = new JLabel("Speisekarte");
 
@@ -38,12 +37,19 @@ public class SpeisekartePanel extends JPanel {
         this.frameManager = frameManager;
         setBackground(Color.WHITE);
 
+        // Überschrift
         speiseKarteLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+        speiseKarteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(Color.WHITE);
+        headerPanel.add(speiseKarteLabel, BorderLayout.CENTER);
+        add(headerPanel, BorderLayout.NORTH);
+
+        // Hauptinhalt
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
         panel.setBorder(BorderFactory.createEmptyBorder(50, 600, 50, 600));
-        setBackground(Color.WHITE);
 
         margaretta.setAlignmentX(Component.CENTER_ALIGNMENT);
         margarettaAnzahl.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -69,16 +75,15 @@ public class SpeisekartePanel extends JPanel {
         panel.add(weiterButton);
         panel.add(wrongInput);
 
-        // Panel for kill switch button
+        // Panel für Abbruch-Button
         JPanel killSwitchPanel = new JPanel(new BorderLayout());
         killSwitchPanel.setBackground(Color.WHITE);
         killSwitchPanel.add(killswitchButton, BorderLayout.WEST);
 
-        add(speiseKarteLabel, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
         add(killSwitchPanel, BorderLayout.SOUTH);
 
-
+        // ActionListener
         weiterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
