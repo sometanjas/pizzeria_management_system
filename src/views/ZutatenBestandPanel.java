@@ -28,12 +28,12 @@ public class ZutatenBestandPanel extends JPanel {
     private JLabel onionLabel = new JLabel("Onion: 5 Euro / 1 kg");
     private JLabel doughLabel = new JLabel("Dough: 4 Euro / 1 kg");
 
-    private JTextField tomatoQty = new JTextField(15);
-    private JTextField salmoneQty = new JTextField(15);
-    private JTextField schinkenQty = new JTextField(15);
-    private JTextField tonnoQty = new JTextField(15);
-    private JTextField onionQty = new JTextField(15);
-    private JTextField doughQty = new JTextField(15);
+    private JTextField tomatoQty = new JTextField(5);
+    private JTextField salmoneQty = new JTextField(5);
+    private JTextField schinkenQty = new JTextField(5);
+    private JTextField tonnoQty = new JTextField(5);
+    private JTextField onionQty = new JTextField(5);
+    private JTextField doughQty = new JTextField(5);
 
     private JLabel wrongInput = new JLabel("");
 
@@ -45,44 +45,52 @@ public class ZutatenBestandPanel extends JPanel {
         companyLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
 
         JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setLayout(new GridLayout(0, 2, 5, 5)); // GridLayout with 2 columns and small gaps between rows
         leftPanel.setBackground(Color.WHITE);
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 10));
+
+        // Set preferred size for the text fields to reduce height
+        Dimension textFieldSize = new Dimension(30, 10);
+        tomatoQty.setPreferredSize(textFieldSize);
+        salmoneQty.setPreferredSize(textFieldSize);
+        schinkenQty.setPreferredSize(textFieldSize);
+        tonnoQty.setPreferredSize(textFieldSize);
+        onionQty.setPreferredSize(textFieldSize);
+        doughQty.setPreferredSize(textFieldSize);
+
+        // Set preferred size for the "Bestellen" button to reduce size
+        bestellenButton.setPreferredSize(new Dimension(30, 10));
 
         leftPanel.add(tomatoLabel);
         leftPanel.add(tomatoQty);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         leftPanel.add(salmoneLabel);
         leftPanel.add(salmoneQty);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         leftPanel.add(schinkenLabel);
         leftPanel.add(schinkenQty);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         leftPanel.add(tonnoLabel);
         leftPanel.add(tonnoQty);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         leftPanel.add(onionLabel);
         leftPanel.add(onionQty);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         leftPanel.add(doughLabel);
         leftPanel.add(doughQty);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         leftPanel.add(bestellenButton);
         leftPanel.add(wrongInput);
 
         JTable table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(400, 200));  // Adjust the size of the table
 
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(scrollPane, BorderLayout.CENTER);
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 20)); // Border to add some space
 
         JPanel killSwitchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         killSwitchPanel.setBackground(Color.WHITE);
         killSwitchPanel.add(killSwitchButton);
 
         add(companyLabel, BorderLayout.NORTH);
-        add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
+        add(leftPanel, BorderLayout.CENTER); // Changed from WEST to CENTER
+        add(rightPanel, BorderLayout.EAST);
         add(killSwitchPanel, BorderLayout.SOUTH);
 
         killSwitchButton.addActionListener(new ActionListener() {
