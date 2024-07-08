@@ -35,7 +35,6 @@ public class ZutatenBestandPanel extends JPanel {
     private JTextField tonnoQty = new JTextField(5);
     private JTextField onionQty = new JTextField(5);
     private JTextField doughQty = new JTextField(5);
-
     private JTextField cheeseQty = new JTextField(5);
 
     private JLabel wrongInput = new JLabel("");
@@ -47,57 +46,57 @@ public class ZutatenBestandPanel extends JPanel {
 
         companyLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
 
-        JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new GridLayout(0, 2, 5, 5)); // GridLayout with 2 columns and small gaps between rows
-        leftPanel.setBackground(Color.WHITE);
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 10));
+        // Center Panel for ingredients and input fields
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setBackground(Color.WHITE);
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 100, 10));
 
-        // Set preferred size for the text fields to reduce height
-        Dimension textFieldSize = new Dimension(30, 10);
-        tomatoQty.setPreferredSize(textFieldSize);
-        salmoneQty.setPreferredSize(textFieldSize);
-        schinkenQty.setPreferredSize(textFieldSize);
-        tonnoQty.setPreferredSize(textFieldSize);
-        onionQty.setPreferredSize(textFieldSize);
-        doughQty.setPreferredSize(textFieldSize);
-        cheeseQty.setPreferredSize(textFieldSize);
+        // Add labels and text fields to center panel
+        addIngredientRow(centerPanel, tomatoLabel, tomatoQty);
+        addIngredientRow(centerPanel, salmoneLabel, salmoneQty);
+        addIngredientRow(centerPanel, schinkenLabel, schinkenQty);
+        addIngredientRow(centerPanel, tonnoLabel, tonnoQty);
+        addIngredientRow(centerPanel, onionLabel, onionQty);
+        addIngredientRow(centerPanel, doughLabel, doughQty);
+        addIngredientRow(centerPanel, cheeseLabel, cheeseQty);
 
-        // Set preferred size for the "Bestellen" button to reduce size
-        bestellenButton.setPreferredSize(new Dimension(30, 10));
+        // "Bestellen" button and error message
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(bestellenButton);
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(wrongInput);
 
-        leftPanel.add(tomatoLabel);
-        leftPanel.add(tomatoQty);
-        leftPanel.add(salmoneLabel);
-        leftPanel.add(salmoneQty);
-        leftPanel.add(schinkenLabel);
-        leftPanel.add(schinkenQty);
-        leftPanel.add(tonnoLabel);
-        leftPanel.add(tonnoQty);
-        leftPanel.add(onionLabel);
-        leftPanel.add(onionQty);
-        leftPanel.add(doughLabel);
-        leftPanel.add(doughQty);
-        leftPanel.add(cheeseLabel);
-        leftPanel.add(cheeseQty);
-        leftPanel.add(bestellenButton);
-        leftPanel.add(wrongInput);
+        // Align components to center
+        bestellenButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        wrongInput.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        add(companyLabel, BorderLayout.NORTH);
+        add(centerPanel, BorderLayout.CENTER);
+
+        // Table Panel for showing ingredients
         JTable table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(400, 200));  // Adjust the size of the table
+        scrollPane.setPreferredSize(new Dimension(200, 100));  // Adjust the size of the table
 
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(scrollPane, BorderLayout.CENTER);
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 20)); // Border to add some space
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 50, 400)); // Border to add some space
 
-        JPanel killSwitchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        killSwitchPanel.setBackground(Color.WHITE);
-        killSwitchPanel.add(killSwitchButton);
+        // Footer Panel for the back button
+        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        footerPanel.setBackground(Color.WHITE);
+        footerPanel.add(killSwitchButton);
+        add(footerPanel, BorderLayout.SOUTH);
 
-        add(companyLabel, BorderLayout.NORTH);
-        add(leftPanel, BorderLayout.CENTER); // Changed from WEST to CENTER
-        add(rightPanel, BorderLayout.EAST);
-        add(killSwitchPanel, BorderLayout.SOUTH);
+        // Wrapper panel to hold both centerPanel and rightPanel
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        mainPanel.add(centerPanel);
+        mainPanel.add(Box.createHorizontalStrut(20)); // Add some space between panels
+        mainPanel.add(rightPanel);
+
+        add(mainPanel, BorderLayout.CENTER);
 
         killSwitchButton.addActionListener(new ActionListener() {
             @Override
@@ -107,6 +106,22 @@ public class ZutatenBestandPanel extends JPanel {
         });
 
         this.refreshData();
+    }
+
+    private void addIngredientRow(JPanel panel, JLabel label, JTextField textField) {
+        JPanel row = new JPanel();
+        row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
+        row.setBackground(Color.WHITE);
+        row.add(Box.createHorizontalGlue());
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        row.add(label);
+        row.add(Box.createRigidArea(new Dimension(10, 0)));
+        textField.setMaximumSize(new Dimension(100, 20)); // Smaller text fields
+        textField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        row.add(textField);
+        row.add(Box.createHorizontalGlue());
+        panel.add(row);
+        panel.add(Box.createVerticalStrut(10));
     }
 
     public JLabel getWrongInput() {
@@ -162,5 +177,8 @@ public class ZutatenBestandPanel extends JPanel {
         tonnoQty.setText("");
         onionQty.setText("");
         doughQty.setText("");
+        cheeseQty.setText("");
     }
 }
+
+

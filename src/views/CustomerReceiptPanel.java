@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 
 public class CustomerReceiptPanel extends JPanel {
     private FrameManager frameManager;
-    private JLabel companyLabel = new JLabel("CustomerReceipt");
-    private JButton backButton = new JButton("Zurück zum Hauptmenu");
+    private JLabel companyLabel = new JLabel("Customer Receipt");
+    private JButton backButton = new JButton("Zurück zum Hauptmenü");
 
     private DefaultTableModel tableModel = new DefaultTableModel();
 
@@ -31,7 +31,17 @@ public class CustomerReceiptPanel extends JPanel {
         // Table
         JTable table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane, BorderLayout.CENTER);
+
+        // Panel to center the table
+        JPanel tablePanel = new JPanel();
+        tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
+        tablePanel.add(Box.createVerticalGlue());
+        scrollPane.setMaximumSize(new Dimension(600, 400));  // Set preferred size for the scroll pane
+        scrollPane.setPreferredSize(new Dimension(600, 400)); // Set maximum size for the scroll pane
+        tablePanel.add(scrollPane);
+        tablePanel.add(Box.createVerticalGlue());
+
+        add(tablePanel, BorderLayout.CENTER);
 
         // Footer
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -73,3 +83,4 @@ public class CustomerReceiptPanel extends JPanel {
         tableModel.addRow(rowData);
     }
 }
+

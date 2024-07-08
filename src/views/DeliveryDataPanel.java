@@ -38,7 +38,7 @@ public class DeliveryDataPanel extends JPanel {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
         inputPanel.setBackground(Color.WHITE);
-        inputPanel.setBorder(BorderFactory.createEmptyBorder(50, 600, 50, 600));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(150, 600, 50, 600));
 
         // Center-align the labels and input fields
         firstnameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
