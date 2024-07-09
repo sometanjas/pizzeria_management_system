@@ -44,6 +44,7 @@ public class PLZPanel extends JPanel {
         checkerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         statusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+
         // Add components to input panel
         inputPanel.add(plzLabel);
         inputPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -52,6 +53,7 @@ public class PLZPanel extends JPanel {
         inputPanel.add(checkerButton);
         inputPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         inputPanel.add(statusLabel);
+
 
         // Panel for back button
         JPanel backPanel = new JPanel(new BorderLayout());
@@ -70,16 +72,18 @@ public class PLZPanel extends JPanel {
                 String text = plzInput.getText();
                 plzInput.setText("");
                 try {
-                    boolean status = plzChecker.testPLZ(text);
-                    if (status) {
-                        Order.getInstance().setPlz(Integer.parseInt(text));
-                        plzInput.setText("");
-                        frameManager.showDeliveryData();
-                    } else {
-                        frameManager.showPLZError();
-                    }
-                } catch (IOException f) {
-                    f.printStackTrace();
+                    int x = Integer.parseInt(text);
+                } catch (NumberFormatException f) {statusLabel.setText("Ungültige Eingabe!");
+                    statusLabel.setForeground(Color.RED);
+                    return;
+                }
+                boolean status = plzChecker.testPLZ(text);
+                if (status) {
+                    Order.getInstance().setPlz(Integer.parseInt(text));
+                    plzInput.setText("");
+                    frameManager.showDeliveryData();
+                } else {
+                    frameManager.showPLZError();
                 }
             }
         });

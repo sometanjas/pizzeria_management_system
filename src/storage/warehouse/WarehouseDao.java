@@ -10,5 +10,4 @@ public interface WarehouseDao {
     void withdrawIngredient(String name, int delta);
 
     void depositIngredient(String name, int delta);
-
 }

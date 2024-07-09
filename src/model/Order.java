@@ -56,7 +56,6 @@ public class Order {
         TransactionsDaoDbImpl.getInstance().addTransaction(transaction);
     }
 
-    // resulting set will present a flat list of all ingredients that needs to be withdrawn from warehouse
     private List<Ingredient> extractIngredient() throws Exception {
         ArrayList<OrderItem> items = this.getItems();
         ArrayList<Ingredient> resultingIngrs = new ArrayList<>();

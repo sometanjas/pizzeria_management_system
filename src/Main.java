@@ -50,7 +50,7 @@ public class Main {
         LoginController loginController = new LoginController(myModel, loginView);
         loginView.addLoginButtonController(loginController);
 
-        // initialize controllers
+
         frameManager.initialize(loginView,
                 mainMenuPanel,
                 bestellungsHistoriePanel,

@@ -8,13 +8,13 @@ public class PostLeitZahlChecker {
 
     private List<String> berlinPLZ;
 
-    public boolean testPLZ(String input) throws IOException {
+    public boolean testPLZ(String input) {
         return istBerlin(input);
     }
 
     private boolean istBerlin(String input) {
         for (String element : berlinPLZ) {
-            if (element.contains(input)) {
+            if (element.equals(input)) {
                 return true;
             }
         }
